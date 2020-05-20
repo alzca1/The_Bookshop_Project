@@ -1,0 +1,10 @@
+<div class="text-center mt-5">
+  <button class="btn btn-danger" (click)="deletePosts()">Delete Books</button>
+</div>
+
+<div class="bookGrid">
+  <app-book class="text-center" *ngFor="let book of loadedBooks" [book]="book"></app-book>
+  <h4 class="text-center mt-4" *ngIf="loadedBooks.length < 1"> No books in the list</h4>
+</div>
+
+<router-outlet></router-outlet>
