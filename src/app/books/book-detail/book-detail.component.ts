@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Book } from 'src/app/book.interface';
+import { ServerService } from 'src/app/services/server.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -10,9 +12,12 @@ import { map } from 'rxjs/operators';
 })
 export class BookDetailComponent implements OnInit {
   book: { id: string };
-  loadedBook = [];
+  loadedBook: Book;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private srvservice: ServerService
+  ) {}
 
   ngOnInit(): void {
     this.book = {
@@ -21,32 +26,20 @@ export class BookDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.book.id = params['id'];
     });
-    this.getBook(this.book.id);
 
-  }
-
-  getBook(id){
-    this.http.get('https://proyectoangular-5f739.firebaseio.com/books.json').pipe(map(responseData => {
-      for (let key in responseData){
-       if(key === id){
-         this.loadedBook.push(responseData[id]);
-       }
+    this.onFetchPosts();
+    this.srvservice.loadedBooksChanged.subscribe((updatedBooks) => {
+      for (let key in updatedBooks) {
+        if (updatedBooks[key].id === this.book.id) {
+          this.loadedBook = { ...updatedBooks[key] };
+        }
       }
-    })).subscribe(posts => {
-      console.log('hello')
-    })
+    });
   }
 
-  // fetchPosts(){
-  //   this.http.get('https://proyectoangular-5f739.firebaseio.com/books.json').pipe(map(responseData => {
-  //     for(let key in responseData){
-  //       if(responseData.hasOwnProperty(key)){
-  //         this.loadedBooks.push({...responseData[key], id:key})
-  //       }
-  //     }
-  //   })).subscribe(posts => {
-  //     console.log(posts);
-  //     console.log(this.loadedBooks)
-  //   })
-  // }
+  onFetchPosts() {
+    this.srvservice.fetchPosts().subscribe(() => {
+      console.log('books fetched');
+    });
+  }
 }

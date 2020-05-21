@@ -1,1 +1,7 @@
-<p>{{loadedBook}}</p>
+<p>book detail works</p>
+<div *ngIf="!loadedBook"> Loading Book ...</div>
+<div *ngIf="loadedBook">
+  <h1>{{ loadedBook.title }}</h1>
+  <h3>{{ loadedBook.author }}</h3>
+  <h4>{{ loadedBook.price }}</h4>
+</div>
