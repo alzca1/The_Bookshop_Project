@@ -7,7 +7,8 @@ img{
 .bookContainer{
   max-width: 190px;
   height: 330px;
-  border: 1px solid rgba(228, 228, 228, 0.986)
+  border: 1px solid rgba(228, 228, 228, 0.986);
+  border-radius: 10px;
 }
 
 
@@ -19,3 +20,5 @@ h4, h5 ,h6 {
 .bookInfo{
 height: auto;
 }
+
+

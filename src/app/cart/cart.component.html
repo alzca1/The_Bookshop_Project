@@ -1,0 +1,33 @@
+<h4 class="text-center" *ngIf="updatedCart.length < 0">The cart is empty</h4>
+
+<div class="genContainer container">
+  <div class="row">
+    <div class="col-9">
+      <div
+        *ngFor="let book of updatedCart"
+        class="container bookContainer d-flex align-items-center"
+      >
+        <div>
+          <img src="{{ book.cover }}" />
+        </div>
+        <div class="cartBookInfo">
+          <p>
+            <a [routerLink]="['/detail', book.id]"
+              ><strong> {{ book.title }}</strong></a
+            >
+          </p>
+          <small> by {{ book.author }}</small>
+          <div>
+            <small class="bookPrice"> {{ book.price }}€</small>
+          </div>
+        </div>
+        <div class="bookAmount container">
+          <p>x {{ book.cartAmount }}</p>
+        </div>
+      </div>
+    </div>
+        <div class="col-3 totalBar">
+          <h6> Total Bar</h6>
+        </div>
+  </div>
+</div>

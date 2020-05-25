@@ -1,7 +1,35 @@
-<p>book detail works</p>
-<div *ngIf="!loadedBook"> Loading Book ...</div>
-<div *ngIf="loadedBook">
-  <h1>{{ loadedBook.title }}</h1>
-  <h3>{{ loadedBook.author }}</h3>
-  <h4>{{ loadedBook.price }}</h4>
+<h4 class="text-center mt-4" *ngIf="loadingBook">Loading Book ...</h4>
+<div *ngIf="loadedBook" class="d-flex justify-content-center m-5">
+  <img class="image" src="{{ loadedBook.cover }}" />
+  <div class="customCard card border-primary">
+    <div class="card-header">
+      <h1>{{ loadedBook.title }}</h1>
+    </div>
+    <div class="card-body text-primary">
+      <h6 class="card-title">{{ loadedBook.author }}</h6>
+      <p class="card-text">{{ loadedBook.price }}€</p>
+      <hr>
+      <div class="card-text">
+        <p>{{loadedBook.summary}}</p>
+        <p *ngIf="!loadedBook.summary">No summary available</p>
+
+      </div>
+      <hr>
+      <div>
+        <button
+          class="btn btn-sm btn-success m-1"
+          [routerLink]="['/edit', loadedBook.id]"
+        >
+          Edit Book
+        </button>
+        <button class="btn btn-sm btn-danger m-1" (click)="onDeleteBook()">
+          Delete Book
+        </button>
+
+        <button class="btn btn-sm btn-primary m-1" (click)="onAddToCart()">
+          Add Book to Cart
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

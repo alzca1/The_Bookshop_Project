@@ -1,0 +1,59 @@
+img{
+  height: 80px;
+}
+
+.cartBookInfo{
+  margin-left: 12px;
+  width: 100%;
+}
+.cartBookInfo p{
+  margin: 0;
+  line-height: 1rem;
+}
+
+small{
+  line-height: 0.2rem;
+  margin-left: 3px;
+}
+
+.bookPrice{
+  color: red;
+  font-weight: 500;
+}
+
+
+.container{
+  padding: 15px auto;
+}
+
+
+.bookContainer{
+  height: 100px;
+  background-color: rgb(248, 244, 244);
+  border-radius: 20px;
+  min-width:350px;
+  margin-top: 15px;
+}
+
+.bookAmount{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.myCol{
+  border: 1px solid black;
+}
+
+.genContainer{
+  margin-top: 30px;
+
+}
+
+.totalBar{
+  border: 2px solid rgba(229, 229, 229, 1.00);
+}
+
+.row{
+  margin-left: -30px;
+  margin-right: -30px;
+}

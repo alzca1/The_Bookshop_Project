@@ -1,16 +1,16 @@
-<a [routerLink]="['/detail', book.id]">
-  <div
-    class="bookContainer d-flex flex-column mx-auto justify-content-between mt-5"
-  >
+<div
+  class="bookContainer d-flex flex-column mx-auto justify-content-between mt-5"
+>
+  <a [routerLink]="['/detail', book.id]">
     <div class="">
       <img src="{{ book.cover }}" />
     </div>
     <div class="container">
       <div class="bookInfo d-flex flex-column">
-        <h4>{{ book.title }}</h4>
-        <h5>{{ book.author }}</h5>
-        <h6>{{ book.price }}</h6>
+        <h4>{{ book.title | stringShortener: 18 }}</h4>
+        <h5>{{ book.author | stringShortener: 18 }}</h5>
+        <h6>{{ book.price }}<small>€</small></h6>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</div>

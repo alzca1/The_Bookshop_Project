@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule, Component } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +12,9 @@ import { HeaderComponent } from './header/header.component';
 import { BooksComponent } from './books/books.component';
 import { BookComponent } from './books/book/book.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { BookEditComponent } from 'src/app/books/book-detail/book-edit/book-edit.component';
+import { CartComponent } from './cart/cart.component';
+import {StringShortener} from './shorten.pipe'
 
 const appRoutes: Route[] = [
   {
@@ -28,6 +32,14 @@ const appRoutes: Route[] = [
   {
     path: 'detail/:id',
     component: BookDetailComponent },
+    {
+      path: 'edit/:id',
+      component: BookEditComponent
+    },
+    {
+      path: 'cart',
+      component: CartComponent
+    }
 ];
 
 @NgModule({
@@ -39,14 +51,19 @@ const appRoutes: Route[] = [
     BooksComponent,
     BookComponent,
     BookDetailComponent,
+    BookEditComponent,
+    CartComponent,
+    StringShortener
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [StringShortener]
 })
 export class AppModule {}

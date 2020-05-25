@@ -3,6 +3,9 @@ export interface Book {
   author: string,
   price: number,
   cover: string
+  id: string,
+  summary: string
+  cartAmount?: number,
 }
 
 
