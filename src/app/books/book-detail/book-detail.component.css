@@ -1,7 +1,37 @@
-
+/*
 .customCard{
   min-width: 270px;
   max-width: 500px;
 }
 
+ */
 
+img {
+  border-radius: 20px;
+}
+
+.bookContainer {
+  width: 95%;
+}
+
+.bookInfo {
+}
+
+.lowLineHeight {
+  line-height: 0.5em;
+}
+
+.smallerText {
+  font-size: 0.9em !important;
+}
+
+.buttonsMenu {
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .bookInfo {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+}

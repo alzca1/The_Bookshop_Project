@@ -1,4 +1,59 @@
 <h4 class="text-center mt-4" *ngIf="loadingBook">Loading Book ...</h4>
+
+<div *ngIf="loadedBook" class="bookContainer container  mt-5">
+  <div class="row">
+    <div
+      class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-2 d-flex justify-content-center"
+    >
+      <img
+        src="{{loadedBook.cover}}"
+        class="img-fluid text-center  mb-2"
+      />
+    </div>
+    <div
+      class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-6 d-flex flex-column  mt-1"
+    >
+      <div class="mt-1 ">
+        <div class="bookInfo">
+          <h6 class="mb-0">{{loadedBook.title}}</h6>
+          <small class="lowLineHeight">by <a href="#">{{loadedBook.author}}</a></small>
+        </div>
+        <hr>
+        <div class="bookSummary mt-3">
+          <p class="text-justify">
+            {{loadedBook.summary}}
+          </p>
+            <p *ngIf="!loadedBook.summary">No summary available</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="buttonsMenu col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex flex-column justify-content-center bg-light "
+    >
+      <div class="text-center smallerText">
+        <p class="text-danger mb-0 mt-2">5€</p>
+        <p>Final product price</p>
+        <h6 class="text-success">In Stock</h6>
+        <p>Free delivery next Sunday. <a href="#">See details</a></p>
+      </div>
+      <hr>
+      <div class="text-center">
+        <button class="btn btn-primary w-75 mb-2" (click)="onAddToCart()">Add to Cart</button>
+        <button class="btn btn-success w-75 mb-2" [routerLink]="['/edit', loadedBook.id]" >Edit Book</button>
+        <button class="btn btn-danger w-75 mb-2" (click)="onDeleteBook()">Delete Book</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <h4 class="text-center mt-4" *ngIf="loadingBook">Loading Book ...</h4>
 <div *ngIf="loadedBook" class="d-flex justify-content-center m-5">
   <img class="image" src="{{ loadedBook.cover }}" />
   <div class="customCard card border-primary">
@@ -32,4 +87,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
