@@ -66,4 +66,8 @@ table{
   .totalBar{
     margin-top: 20px;
   }
+
+  .bookContainer{
+    font-size: 0.8rem;
+  }
 }

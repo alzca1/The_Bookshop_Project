@@ -15,7 +15,8 @@ import { BookComponent } from './books/book/book.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from 'src/app/books/book-detail/book-edit/book-edit.component';
 import { CartComponent } from './cart/cart.component';
-import {StringShortener} from './shorten.pipe'
+import {StringShortener} from './shorten.pipe';
+import { FooterComponent } from './footer/footer.component'
 
 const appRoutes: Route[] = [
   {
@@ -54,14 +55,15 @@ const appRoutes: Route[] = [
     BookDetailComponent,
     BookEditComponent,
     CartComponent,
-    StringShortener
+    StringShortener,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     NgbModule
   ],
   providers: [],

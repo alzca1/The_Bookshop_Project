@@ -1,0 +1,23 @@
+.footerContainer{
+  font-size: 0.7rem;
+}
+
+li{
+  list-style: none;
+  margin: 5px;
+  padding: 0;
+  display: inline-block;
+}
+
+footerContainer{
+  text-align: center;
+  margin: 0 0 13px;
+  padding: 0;
+  min-height: 11px;
+  max-width: 95%
+}
+
+ul{
+  max-width: 100%;
+  padding: 0;
+}
