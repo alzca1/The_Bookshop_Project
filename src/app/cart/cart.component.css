@@ -10,7 +10,7 @@ img{
   margin: 0;
   line-height: 1rem;
   width: auto;
-  border: 1px solid black;
+
 }
 
 small{
@@ -33,7 +33,7 @@ small{
   height: 100px;
   background-color: rgb(248, 244, 244);
   border-radius: 20px;
-  /* min-width:250px; */
+  min-width:100%;
   margin-top: 15px;
 }
 
@@ -42,9 +42,7 @@ small{
   justify-content: flex-end;
 }
 
-.myCol{
-  border: 1px solid black;
-}
+
 
 .genContainer{
   margin-top: 30px;
@@ -54,6 +52,7 @@ small{
 
 .totalBar{
   border: 2px solid rgba(229, 229, 229, 1.00);
+  font-size: 0.85xem !important;
 }
 
 
@@ -61,4 +60,10 @@ small{
 
 table{
   width: 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .totalBar{
+    margin-top: 20px;
+  }
 }
