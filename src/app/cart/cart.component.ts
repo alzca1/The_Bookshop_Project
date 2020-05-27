@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Book } from 'src/app/book.interface';
+import {faCoffee} from '@fortawesome/free-solid-svg-icons'
+import {faFrown} from '@fortawesome/free-regular-svg-icons'
 
 @Component({
   selector: 'app-cart',
@@ -8,6 +10,8 @@ import { Book } from 'src/app/book.interface';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  faCoffee = faCoffee;
+  faFrown = faFrown;
   updatedCart: {id:string, title: string, author: string, cover: string, cartAmount: number, price: number}[];
   total: number;
   constructor(private cartservice: CartService) { }

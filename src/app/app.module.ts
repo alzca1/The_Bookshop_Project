@@ -17,6 +17,7 @@ import { BookEditComponent } from 'src/app/books/book-detail/book-edit/book-edit
 import { CartComponent } from './cart/cart.component';
 import {StringShortener} from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Route[] = [
   {
@@ -64,7 +65,8 @@ const appRoutes: Route[] = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
