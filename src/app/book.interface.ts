@@ -5,6 +5,7 @@ export interface Book {
   cover: string
   id: string,
   summary: string
+  stock:number
   cartAmount?: number,
 }
 

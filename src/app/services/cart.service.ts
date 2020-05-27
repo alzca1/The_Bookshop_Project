@@ -42,12 +42,12 @@ export class CartService {
     }, 300);
   }
 
-  getTotal() {
-    let total: number;
-    for (let key in this.cart) {
-      total += this.cart[key].price;
+  getTotal(cart) {
+    let total = 0;
+    for (let key in cart) {
+      total += (cart[key].price * cart[key].cartAmount);
     }
-    return total;
+    return total.toFixed(2)
   }
 
   getCart(){

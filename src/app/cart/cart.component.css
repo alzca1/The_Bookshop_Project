@@ -9,6 +9,8 @@ img{
 .cartBookInfo p{
   margin: 0;
   line-height: 1rem;
+  width: auto;
+  border: 1px solid black;
 }
 
 small{
@@ -46,6 +48,7 @@ small{
 
 .genContainer{
   margin-top: 30px;
+  max-width: 95%;
 
 }
 
@@ -53,7 +56,9 @@ small{
   border: 2px solid rgba(229, 229, 229, 1.00);
 }
 
-.row{
-  /* margin-left: -30px;
-  margin-right: -30px; */
+
+
+
+table{
+  width: 100%;
 }

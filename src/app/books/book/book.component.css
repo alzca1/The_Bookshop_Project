@@ -6,7 +6,7 @@ img{
 
 .bookContainer{
   max-width: 190px;
-  height: 330px;
+  height: auto;
   border: 1px solid rgba(228, 228, 228, 0.986);
   border-radius: 10px;
 }

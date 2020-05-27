@@ -9,7 +9,7 @@ import { Book } from 'src/app/book.interface';
 })
 export class CartComponent implements OnInit {
   updatedCart: {id:string, title: string, author: string, cover: string, cartAmount: number, price: number}[];
-
+  total: number;
   constructor(private cartservice: CartService) { }
 
   ngOnInit(): void {
@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
     this.cartservice.cartChanged.subscribe((cartChanged) => {
       this.updatedCart = [...cartChanged];
     })
-    console.log('initialized')
+    this.onGetTotal();
   }
 
   logCart(){
@@ -25,5 +25,9 @@ export class CartComponent implements OnInit {
     console.log('hello')
     console.log(this.updatedCart)
     console.log(this.cartservice.cartChanged)
+  }
+
+  onGetTotal(){
+   this.total =  Number(this.cartservice.getTotal(this.updatedCart));
   }
 }
