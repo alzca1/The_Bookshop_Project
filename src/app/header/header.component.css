@@ -1,3 +1,200 @@
-a{
-  cursor: pointer;
+body {
+  background: white;
+}
+
+.navbar-default .navbar-nav > .open > a.dropdown-toggle {
+  background-color: black !important;
+}
+
+.fa-search:hover {
+  color: #007bff;
+}
+
+.fa-user-alt:hover {
+  color: yellow;
+}
+
+.pre-nav {
+  background-color: black;
+  padding-bottom: 2px !important;
+  padding-top: 2px !important;
+  min-height: 9.2vh;
+}
+
+.pre-nav-input {
+  background-color: black;
+  padding-bottom: 2px !important;
+  padding-top: 2px !important;
+}
+
+.dropdown-menu {
+  background-color: black !important;
+}
+
+.dropdown-menu a {
+  color: #007bff !important;
+}
+
+.v-ali {
+  align-items: center;
+}
+
+img {
+  width: 225px;
+}
+
+.widerInput {
+  width: 40vw !important;
+}
+
+.navbar-nav li {
+  display: inline-block;
+}
+
+.scrollable {
+  white-space: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollable {
+  -ms-overflow-style: none;
+}
+
+.postNav {
+  background-color: black;
+  padding-bottom: 2px !important;
+  padding-top: 2px !important;
+}
+
+.parentDiv {
+  display: grid;
+  width: 65%;
+  height: auto;
+  margin: 10vw;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 20vh auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgBooks {
+  grid-column: 1 / -1;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.bookCarrousel {
+  border: 1px solid blue;
+  margin: 0 auto;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
+  align-content: center;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 384px;
+  /* justify-content: center; */
+  align-content: center;
+  text-align: center;
+  margin: 1rem 0;
+  background: rgb(231, 182, 182);
+  align-self: center;
+  border-radius: 12px;
+}
+.img-book {
+  max-width: 170px;
+  max-height: 230px;
+  margin: 15px auto 10px auto;
+}
+
+.priceContainer {
+  height: 44px;
+  width: 100%;
+  padding: 0 20px 0 20px;
+  margin-bottom: 0px;
+}
+
+.priceSection {
+  margin-bottom: 0px;
+  height: 28px;
+  line-height: 28px;
+  text-align: left;
+}
+
+.priceDecimal {
+  font-size: 12px;
+  top: -0.7em;
+  position: absolute;
+}
+
+.priceWhole {
+  font-size: 21px;
+}
+
+.relativeContainer {
+  display: inline;
+  position: relative;
+}
+
+.bookDetails {
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0 20px 0 20px;
+  text-align: left;
+  overflow: hidden;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+.bookDetailsText {
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.bookYear {
+  font-size: 9px;
+  top: -0.01em;
+  position: absolute;
+}
+
+app-books {
+  margin: 0 auto;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.collapsedUserMenu {
+  background-color: black;
+}
+
+@media screen and (min-width: 576px) {
+  .mobileCollapsableUserMenu {
+    display: none;
+  }
+
+  .pre-nav {
+    min-height: 9.2vh;
+  }
+}
+
+@media screen and (max-width: 577px) {
+  .desktopCollapsableUserMenu {
+    display: none;
+  }
 }

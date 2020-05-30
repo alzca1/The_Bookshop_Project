@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule, Component } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { CartComponent } from './cart/cart.component';
 import {StringShortener} from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 const appRoutes: Route[] = [
   {
@@ -66,7 +68,8 @@ const appRoutes: Route[] = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

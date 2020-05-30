@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
       this.updatedCart = [...cartChanged];
     })
     this.onGetTotal();
+    console.log('cart loaded!')
   }
 
   logCart(){

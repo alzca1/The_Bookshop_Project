@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+<!-- <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
   <a class="navbar-brand" routerLink="/home">Book</a>
   <button
     class="navbar-toggler"
@@ -7,7 +7,7 @@
     data-target="collapseDiv"
     (click)="isMenuCollapsed = !isMenuCollapsed"
   >
-    <span class="navbar-toggler-icon">-</span>
+    <span><img src="assets/images/logo.png"</span>
   </button>
 
   <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed" id="collapseDiv">
@@ -23,6 +23,200 @@
       </li>
     </ul>
   </div>
+</nav> -->
+
+<!-- <div class="h-100 bg-dark d-flex align-items-center">
+  <fa-icon class="fa-lg burger d-xs-block d-sm-none ml-3" [icon]="faHamburger" data-toggle="collapse" data-target="#navbarNav"></fa-icon>
+  <img src="assets/images/logo.png" class="img-fluid ml-2 p-1">
+
+  <div class="input-group mr-2 pb-1 ml-auto d-none d-lg-block">
+    <input type="text" class="form-control form-control-sm shadow-none navSearchBar">
+    <div class="input-group-prepend">
+      <button
+        class="btn btn-sm shadow-none btnSearchBar"
+        type="button"
+        id="button-addon1"
+        style="background-color: white; border: none;"
+      >
+        <fa-icon class="navSearchBarIcon" [icon]="faSearch"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<div class="pre-nav align-items-center">
+  <div class="d-flex align-items-center">
+    <div class="d-xs-block d-sm-none">
+      <fa-icon
+        class="fa-lg burger d-xs-block d-sm-none ml-3 navbar-toggler"
+        [icon]="faHamburger"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        (click)="toggle()"
+      ></fa-icon>
+    </div>
+
+    <div class="ml-2 text-light p-2">
+      <a routerLink="/books">
+        <img class="img-fluid logoBook" src="assets/images/logo.png" />
+      </a>
+    </div>
+    <div></div>
+    <div
+      class="pre-nav-input pb-1 d-none d-lg-block ml-auto align-content-center"
+    >
+      <div class="mr-2">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control form-control-sm shadow-none widerInput"
+            placeholder=""
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+            style="border: 0px solid white;"
+          />
+          <div class="input-group-prepend">
+            <button
+              class="btn btn-sm shadow-none"
+              type="button"
+              id="button-addon1"
+              style="background-color: white; border: none;"
+            >
+              <fa-icon class="navSearchBarIcon" [icon]="faSearch"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row ml-auto">
+      <div
+        ngbDropdown
+        display="dynamic"
+        placement="bottom-right"
+        class="my-auto desktopCollapsableUserMenu"
+      >
+        <button
+          class="btn btn-outline dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          ngbDropdownToggle
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <fa-icon
+            [icon]="faUser"
+            class="text-center fa-lg m-2"
+            style="color: rgb(221, 221, 221);"
+          ></fa-icon>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+          <a href="#" ngbDropdownItem>Sign In</a>
+          <a href="#" ngbDropdownItem>Forgot your password?</a>
+          <a href="#" ngbDropdownItem>Create Account</a>
+        </div>
+      </div>
+
+      <div class="mobileCollapsableUserMenu">
+        <button
+          class="btn btn-outline"
+          type="button"
+          id="dropdownMenuButton"
+          aria-controls="collapseMenu"
+          [attr.aria-expanded]="!isMenuCollapsed"
+          (click)="isMenuCollapsed = !isMenuCollapsed"
+        >
+          <fa-icon
+            [icon]="faUser"
+            class="text-center fa-lg m-2"
+            style="color: rgb(221, 221, 221);"
+          ></fa-icon>
+        </button>
+      </div>
+
+      <div class="my-auto mr-2 text-light">
+        <button class="btn btn-outline" type="button" routerLink="/cart">
+          <fa-icon
+            [icon]="faShoppingCart"
+            class="text-center fa-lg mt-2 mb-2 mr-1 ml-1"
+            style="color: #dddddd;"
+          ></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- [ngbCollapse]="isMenuCollapsed" -->
+  <div
+    id="collapseMenu"
+    class="collapsedUserMenu justify-content-center mobileCollapsableUserMenu"
+    [@collapseMenu]="isMenuCollapsed ? 'initial' : 'final'"
+  >
+    <div
+      class="d-flex flex-column align-items-center justify-content-center mx-4 my-2"
+    >
+      <a class="font-weight-bold mb-2" href="#">Sign In</a>
+      <a class="font-weight-bold mb-2" href="#">Forgot Password?</a>
+      <a class="font-weight-bold mb-2" href="#">Create Account</a>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar collapse-->
+<nav class="navbar navbar-expand-sm postNav">
+  <div
+    class="collapse navbar-collapse scrollable"
+    id="navbarSupportedContent"
+    [ngbCollapse]="isNavbarCollapsed"
+    [@collapseNav]="isNavbarCollapsed ? 'closed' : 'open'"
+  >
+    <ul class="navbar-nav scrollable">
+      <li class="nav-item">
+        <a class="nav-link books" href="#" (click)="isNavbarCollapsed = true"
+          >Books <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Best Sellers</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Ebooks</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Recommended</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Textbooks</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true">Kids</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Newsstand</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Collectibles</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Gifts, Home & Office</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="isNavbarCollapsed = true"
+          >Movies & TV</a
+        >
+      </li>
+    </ul>
+  </div>
 </nav>
-
-
