@@ -1,18 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#"
     ><img src="../../assets/images/logo.png"
   /></a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarColor01"
-    aria-controls="navbarColor01"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <fa-icon [icon]="faHamburger"></fa-icon>
-  </button>
+  <div class="d-flex">
+
+
+    <button class="navbar-toggler fa-lg" type="button" routerLink="/user"><fa-icon [icon]="faUser"></fa-icon></button>
+    <button class="navbar-toggler fa-lg" type="button" routerLink="/user"><fa-icon [icon]="faShoppingCart"></fa-icon></button>
+    <button
+      class="navbar-toggler fa-lg"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <fa-icon [icon]="faHamburger"></fa-icon>
+    </button>
+  </div>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <form class="form-inline d-lg-none mt-3">
@@ -46,84 +52,40 @@
         >
           Categories
         </a>
-        <div class="dropdown-menu bg-dark " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-white-50" href="#">Fiction & Literature</a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-white-50" href="#"
+            >Fiction & Literature</a
+          >
           <a class="dropdown-item text-white-50" href="#">Romance</a>
           <a class="dropdown-item text-white-50" href="#">Non-fiction</a>
           <a class="dropdown-item text-white-50" href="#">Mistery & Suspense</a>
           <a class="dropdown-item text-white-50" href="#">Kids</a>
-          <a class="dropdown-item text-white-50" href="#">Science Fiction & Fantasy</a>
+          <a class="dropdown-item text-white-50" href="#"
+            >Science Fiction & Fantasy</a
+          >
           <a class="dropdown-item text-white-50" href="#">Biography & Memoir</a>
           <a class="dropdown-item text-white-50" href="#">Business & Finance</a>
-          <a class="dropdown-item text-white-50" href="#">Comic & Graphic Novels</a>
+          <a class="dropdown-item text-white-50" href="#"
+            >Comic & Graphic Novels</a
+          >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-white-50" href="#">Something else here</a>
+          <a class="dropdown-item text-white-50" href="#"
+            >Something else here</a
+          >
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/cart" href="#">Cart</a>
-      </li>
+
       <li class="nav-item">
         <a class="nav-link" href="#">Wishlist</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
-      <li class="nav-item dropdown bg-dark">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          User
-        </a>
-
-        <div class="dropdown-menu bg-dark">
-          <form class="px-4 py-3 text-muted">
-            <div class="form-group">
-              <label for="exampleDropdownFormEmail1" class="text-white-50">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="exampleDropdownFormEmail1"
-                placeholder="email@example.com"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleDropdownFormPassword1" class="text-white-50">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="exampleDropdownFormPassword1"
-                placeholder="Password"
-              />
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="dropdownCheck"
-                />
-                <label class="form-check-label text-white-50" for="dropdownCheck">
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-outline-info">Log In</button>
-          </form>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-white-50" href="#">New around here? Sign up</a>
-          <a class="dropdown-item text-white-50" href="#">Forgot password?</a>
-        </div>
-      </li>
+      <li class="nav-item dropdown bg-dark"></li>
     </ul>
 
-
+    <nav></nav>
+    <!--señal ///-->
     <form class="form-inline d-none d-lg-inline-block">
       <input
         class="form-control mr-sm-2"
@@ -136,6 +98,66 @@
       </button>
     </form>
 
+    <div class="navbar-nav">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        User
+      </a>
 
+      <div class="dropdown-menu dropdown-menu-right bg-dark">
+        <form class="px-4 py-3 text-muted">
+          <div class="form-group">
+            <label for="exampleDropdownFormEmail1" class="text-white-50"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleDropdownFormEmail1"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleDropdownFormPassword1" class="text-white-50"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleDropdownFormPassword1"
+              placeholder="Password"
+            />
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="dropdownCheck"
+              />
+              <label class="form-check-label text-white-50" for="dropdownCheck">
+                Remember me
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-outline-info">Log In</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-white-50" href="#"
+          >New around here? Sign up</a
+        >
+        <a class="dropdown-item text-white-50" href="#">Forgot password?</a>
+      </div>
+      <div class="d-none d-md-block">
+        <a class="nav-link" routerLink="/cart" href="#">Cart</a>
+      </div>
+    </div>
   </div>
 </nav>
