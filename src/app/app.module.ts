@@ -19,6 +19,10 @@ import { CartComponent } from './cart/cart.component';
 import {StringShortener} from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthComponent } from './auth/auth.component';
+import { UserComponent } from './user/user.component';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+
 
 
 const appRoutes: Route[] = [
@@ -44,6 +48,15 @@ const appRoutes: Route[] = [
     {
       path: 'cart',
       component: CartComponent
+    }, 
+    {
+      path: 'auth', 
+      component: AuthComponent
+    }, 
+    {
+      path: 'user', 
+      component: UserComponent,
+      // canActivate: [AuthGuard]
     }
 ];
 
@@ -59,7 +72,9 @@ const appRoutes: Route[] = [
     BookEditComponent,
     CartComponent,
     StringShortener,
-    FooterComponent
+    FooterComponent,
+    AuthComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

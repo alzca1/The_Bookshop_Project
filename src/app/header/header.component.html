@@ -5,8 +5,9 @@
   <div class="d-flex">
 
 
-    <button class="navbar-toggler fa-lg" type="button" routerLink="/user"><fa-icon [icon]="faUser"></fa-icon></button>
-    <button class="navbar-toggler fa-lg" type="button" routerLink="/user"><fa-icon [icon]="faShoppingCart"></fa-icon></button>
+    <button class="navbar-toggler fa-lg" type="button" [routerLink]="[isAuthenticated? '/user': '/auth']"><fa-icon [icon]="faUser"></fa-icon></button>
+    <button class="navbar-toggler fa-lg" type="button" routerLink="/cart"><fa-icon [icon]="faShoppingCart"></fa-icon></button>
+    
     <button
       class="navbar-toggler fa-lg"
       type="button"
@@ -98,7 +99,7 @@
       </button>
     </form>
 
-    <div class="navbar-nav">
+    <div class="navbar-nav" *ngIf="!isAuthenticated">
       <a
         class="nav-link dropdown-toggle"
         href="#"

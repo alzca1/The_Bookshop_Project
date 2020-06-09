@@ -1,13 +1,13 @@
-<!-- <div class="text-center mt-5">
-  <button class="btn btn-danger" (click)="deletePosts()">Delete Books</button>
-</div> -->
-
 <div class="d-flex justify-content-center mt-5">
-  <div class="spinner-border text-primary" *ngIf="loadingBooks" style="width: 3rem;height: 3rem">
+  <div
+    class="spinner-border text-primary"
+    *ngIf="loadingBooks"
+    style="width: 3rem; height: 3rem;"
+  >
     <span class="sr-only text-center">Loading</span>
   </div>
 </div>
-<!-- <h4 class="text-center mt-4" *ngIf="loadingBooks">Loading Books</h4> -->
+
 <h4 class="text-center mt-4" *ngIf="loadedBooks.length < 1 && !loadingBooks">
   No books in the list
 </h4>
