@@ -8,24 +8,6 @@ import { Router } from '@angular/router';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit, OnDestroy {
-  userSub: Subscription;
-  userName: string;
-  constructor(private authService: AuthService, private router: Router) {}
-
-  onLogout() {
-    this.authService.logout();
-  }
-
-  ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe((user) => {
-      if (user) {
-        this.userName = user.email;
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
+export class UserComponent {
+  
 }
