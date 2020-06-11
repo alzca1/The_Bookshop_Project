@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pruebashttp": {
+    "thebookshop": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pruebashttp",
+            "outputPath": "dist/thebookshop",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pruebashttp:build"
+            "browserTarget": "thebookshop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pruebashttp:build:production"
+              "browserTarget": "thebookshop:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pruebashttp:build"
+            "browserTarget": "thebookshop:build"
           }
         },
         "test": {
@@ -107,16 +107,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "pruebashttp:serve"
+            "devServerTarget": "thebookshop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "pruebashttp:serve:production"
+              "devServerTarget": "thebookshop:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "pruebashttp"
+  "defaultProject": "thebookshop"
 }

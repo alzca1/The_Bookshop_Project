@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/auth/user.model';
 import { Router } from '@angular/router';
+import {environment} from '../../environments/environment'
 
 export interface AuthResponseData {
   kind: string;
@@ -16,12 +17,39 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
+
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
+
+
+
+  changeEmail(newEmail: string){
+    const idToken = JSON.parse(localStorage.getItem('userData'))
+    console.log(idToken._token);
+    return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + environment.firebaseAPIKey,
+    {
+      idToken: idToken._token , 
+      email: newEmail,
+      returnSecureToken: true 
+    }
+    )
+  }
+
+  changePassword(newPassword:string){
+    const idToken = JSON.parse(localStorage.getItem('userData'))
+    return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + environment.firebaseAPIKey,
+    {
+      idToken: idToken._token , 
+      password: newPassword,
+      returnSecureToken: true 
+    }
+    )
+  }
 
   signUp(email: string, password: string) {
     return this.http

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit{
-  title = 'pruebashttp';
+  title = 'thebookshop';
 
 
 constructor(private authService: AuthService){}

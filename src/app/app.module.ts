@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule, Component } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Route, RouterModule } from '@angular/router';
+
+
 import { BookFormComponent } from './book-form/book-form.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,14 +17,16 @@ import { BookComponent } from './books/book/book.component';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from 'src/app/books/book-detail/book-edit/book-edit.component';
 import { CartComponent } from './cart/cart.component';
-import {StringShortener} from './shorten.pipe';
-import { FooterComponent } from './footer/footer.component'
+import { StringShortener } from './shorten.pipe';
+import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthComponent } from './auth/auth.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from 'src/app/auth/auth.guard';
-
-
+import { EditUserAuthComponent } from './user/edit-user-auth/edit-user-auth.component';
+import { UserMenuComponent } from './user/user-menu/user-menu.component';
+import { EditPasswordAuthComponent } from './user/edit-password-auth/edit-password-auth.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 
 const appRoutes: Route[] = [
   {
@@ -40,24 +43,49 @@ const appRoutes: Route[] = [
   },
   {
     path: 'detail/:id',
-    component: BookDetailComponent },
-    {
-      path: 'edit/:id',
-      component: BookEditComponent
-    },
-    {
-      path: 'cart',
-      component: CartComponent
-    }, 
-    {
-      path: 'auth', 
-      component: AuthComponent
-    }, 
-    {
-      path: 'user', 
-      component: UserComponent,
-      // canActivate: [AuthGuard]
-    }
+    component: BookDetailComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: BookEditComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'usermenu',
+        pathMatch: 'full',
+      },
+      {
+        path: 'usermenu',
+        component: UserMenuComponent,
+      },
+      {
+        path: 'editAuthDetails',
+        component: EditUserAuthComponent,
+      },
+
+      {
+        path: 'editPassword',
+        component: EditPasswordAuthComponent,
+      },
+      {
+        path: 'userDetails',
+        component: UserDetailsComponent
+      }
+    ],
+  },
 ];
 
 @NgModule({
@@ -74,7 +102,11 @@ const appRoutes: Route[] = [
     StringShortener,
     FooterComponent,
     AuthComponent,
-    UserComponent
+    UserComponent,
+    EditUserAuthComponent,
+    UserMenuComponent,
+    EditPasswordAuthComponent,
+    UserDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -84,10 +116,10 @@ const appRoutes: Route[] = [
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     NgbModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [StringShortener]
+  exports: [StringShortener],
 })
 export class AppModule {}
