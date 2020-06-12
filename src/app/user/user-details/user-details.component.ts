@@ -1,47 +1,38 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { UserDetailsService } from 'src/app/services/userDetails.service';
 import { NgForm } from '@angular/forms';
 import { UserDetails } from 'src/app/user/userDetails.model';
 
-
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css']
+  styleUrls: ['./user-details.component.css'],
 })
-export class UserDetailsComponent implements OnInit {
-@ViewChild('userForm', {static: true}) userForm: NgForm
-userId: any; 
-  constructor(private userDetailsService : UserDetailsService) { }
+export class UserDetailsComponent implements OnInit, OnDestroy {
+  userId: any;
+  details: any;
+  detail: UserDetails;
+  private sub: any; 
+
+  constructor(private userDetailsService: UserDetailsService) {}
 
   ngOnInit(): void {
-     this.userId = JSON.parse(localStorage.getItem('userData'));
+    this.userId = JSON.parse(localStorage.getItem('userData'));
+    this.onGetDetails();
+    this.sub = this.userDetailsService.loadedDetailsChanged.subscribe((updatedDetails:UserDetails[]) => {
+      this.details = updatedDetails;
+      console.log(this.details)
+    })
   }
 
-  onSubmit(){
-    const userDetails = this.userForm.value;
-    
-    // console.log(this.userId._token)
-    const details = this.onGetDetails(); 
-    console.log(details);
-    // this.userDetailsService.submitUserDetails(userDetails, this.userId.id, this.userId._token)
+  ngOnDestroy():void{
+    this.sub.unsubscribe(); 
   }
-
-  onGetDetails(){
-    this.userDetailsService.getUserDetails(this.userId.id, this.userId._token)
+  onGetDetails() {
+    this.userDetailsService
+      .getUserDetails(this.userId.id, this.userId._token)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
