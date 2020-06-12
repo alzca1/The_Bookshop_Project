@@ -27,6 +27,7 @@ import { EditUserAuthComponent } from './user/edit-user-auth/edit-user-auth.comp
 import { UserMenuComponent } from './user/user-menu/user-menu.component';
 import { EditPasswordAuthComponent } from './user/edit-password-auth/edit-password-auth.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { UserDetailsFormComponent } from './user/user-details/user-details-form/user-details-form.component';
 
 const appRoutes: Route[] = [
   {
@@ -83,6 +84,14 @@ const appRoutes: Route[] = [
       {
         path: 'userDetails',
         component: UserDetailsComponent
+      }, 
+      {
+        path: 'userDetailsForm', 
+        component: UserDetailsFormComponent
+      }, 
+      {
+        path: 'userDetailsForm/:id', 
+        component: UserDetailsFormComponent
       }
     ],
   },
@@ -107,6 +116,7 @@ const appRoutes: Route[] = [
     UserMenuComponent,
     EditPasswordAuthComponent,
     UserDetailsComponent,
+    UserDetailsFormComponent,
   ],
   imports: [
     CommonModule,
