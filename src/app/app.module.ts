@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Component } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Route, RouterModule } from '@angular/router';
@@ -122,6 +122,7 @@ const appRoutes: Route[] = [
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     NgbModule,
