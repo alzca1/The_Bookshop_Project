@@ -1,0 +1,12 @@
+.spinner-border {
+    width: 5rem !important;
+    height: 5rem !important;
+    margin-top: 5rem;
+    /* Enter your own width above */
+  }
+
+
+  .addressContainer{
+      width: 85vw;
+      border: 1px solid red; 
+  }

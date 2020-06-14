@@ -1,21 +1,50 @@
-<h3 class="text-center">User Address Info</h3>
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+  <div
+    class="spinner-border text-primary text-center spinner"
+    
+    style="width: 3rem; height: 3rem;"
+  >
+    <span class="sr-only text-center">Loading</span>
+  </div>
+</div>
 
-<div *ngFor="let detail of details">
-  <div class="container">
-    <div class="row d-flex justify-content-center">
-      <div class="col-xs-12">
-        <div class="border p-4 mb-2">
-          <h5>Recipient: {{ detail.firstName }} {{ detail.surname }}</h5>
-          <h6>{{ detail.address1 }} - {{ detail.postCode }}</h6>
-          <h6>{{ detail.city }} ({{ detail.country }}</h6>
-          <span class="mr-2"><a [routerLink]="['../userDetailsForm', detail.id]" >Edit </a></span>
-          <span class="mr-2 "><a class="text-danger" href="#">Delete </a></span>
+<div *ngIf="!details && isReady" class="mt-5">
+  <h4 class="text-center" > No details provided yet!</h4>
+</div>
+
+<div class="container mt-3" *ngIf="details">
+  <h3 class="text-center">User Address Info</h3>
+
+  <div *ngFor="let detail of details">
+    <div class="container ">
+      <div class="row d-flex justify-content-center">
+        <div class="col-xs-12">
+          <div class="border p-4 mb-2 addressContainer">
+            <h5>{{ detail.firstName }} {{ detail.surname }}</h5>
+            <h6>{{ detail.address1 }} - {{ detail.postCode }}</h6>
+            <h6>{{ detail.city }} ({{ detail.country }}</h6>
+            <span class="mr-5"
+              ><a [routerLink]="['../userDetailsForm', detail.id]"
+                >Edit
+              </a></span
+            >
+            <span class="mr-2"
+              ><a class="text-danger" (click)="onDeleteDetail(detail.id)">Delete </a></span
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<button class="btn btn-small btn-outline-dark" routerLink="../userDetailsForm">Add Address</button>
+<div class="justify-content-center d-flex" *ngIf="!isLoading">
+  <button
+    class="btn btn-small btn-outline-dark mt-5"
+    routerLink="../userDetailsForm"
+  >
+    Add Address
+  </button>
 
-
+</div>

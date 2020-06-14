@@ -8,7 +8,6 @@
   </div>
 </div>
 
-
 <div class="container mt-3" *ngIf="isReady">
   <h1 class="text-center mt-3">User Details</h1>
   <div class="row justify-content-center">
@@ -16,7 +15,6 @@
       <form
         [formGroup]="userForm"
         (ngSubmit)="addressId ? onPatchDetails() : onSubmit()"
-        
       >
         <div class="form-group">
           <label for="firstName">Name</label>

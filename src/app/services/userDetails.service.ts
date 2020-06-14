@@ -42,41 +42,21 @@ export class UserDetailsService {
       );
   }
 
-  getUserDetail(userId, addressId, token){
-    
-    const baseUrl = 'https://proyectoangular-5f739.firebaseio.com/users/' + userId + '/details/' + addressId + '.json?auth=' + token
-    return this.http.get(baseUrl).pipe(map(responseData => {
-        console.log(responseData)
-          this.loadedDetailsChanged.emit(responseData)
-        }
-    ))}
-      
-    
-  
-
-
-  // getUserDetail(data, id) {
-  //   const item = data.find(item => item.id === id);
-  //   console.log(item);
-  //   return item; 
-  //   // console.log(data)
-  //   // console.log(id)
-  //   // let detail;
-  //   // data.forEach((element) => {
-  //   //   console.log(element)
-  //   //   if (element.id === id) {
-  //   //     detail = element;
-  //   //   }
-  //   // });
-  //   // for (let detail of data) {
-  //   //   console.log(detail);
-  //   //   if (detail.id === id) {
-  //   //     console.log(detail);
-  //   //     return detail;
-  //   //   }
-  //   // }
-    
-  // }
+  getUserDetail(userId, addressId, token) {
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      userId +
+      '/details/' +
+      addressId +
+      '.json?auth=' +
+      token;
+    return this.http.get(baseUrl).pipe(
+      map((responseData) => {
+        console.log(responseData);
+        this.loadedDetailsChanged.emit(responseData);
+      })
+    );
+  }
 
   patchDetails(userId, detailsId, data, token) {
     const baseUrl =
@@ -86,8 +66,8 @@ export class UserDetailsService {
       detailsId +
       '.json?auth=' +
       token;
-      console.log(baseUrl)
-      console.log(data);
+    console.log(baseUrl);
+    console.log(data);
     return this.http.patch(baseUrl, {
       firstName: data.firstName,
       surname: data.surname,
@@ -98,6 +78,21 @@ export class UserDetailsService {
       postCode: data.postCode,
       city: data.city,
       country: data.country,
+    });
+  }
+
+  deleteDetail(userId, detailsId, token) {
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      userId +
+      '/details/' +
+      detailsId +
+      '.json?auth=' +
+      token;
+    this.http.delete(baseUrl).subscribe((response) => {
+      this.getUserDetails(userId, token).subscribe((response) => {
+        console.log('updating list');
+      });
     });
   }
 }

@@ -79,6 +79,9 @@ export class UserDetailsFormComponent implements OnInit {
       this.userId,
       this.token
     );
+    setTimeout(() => {
+      this.router.navigate(['user/userDetails']).then();
+    }, 1000);
   }
 
   onGetDetail() {
@@ -87,9 +90,6 @@ export class UserDetailsFormComponent implements OnInit {
       .subscribe(
         (responseData) => {
           console.log(responseData);
-        },
-        (error) => {
-          console.log(error);
         }
       );
   }
@@ -103,13 +103,11 @@ export class UserDetailsFormComponent implements OnInit {
         this.userForm.value,
         this.token
       )
-      .subscribe(
-        (data) => {
-          console.log('Put was successful', data);
-        },
-        (error) => {
-          console.log('Error', error);
-        }
-      );
+      .subscribe((data) => {
+        console.log('Put was successful', data);
+      });
+    setTimeout(() => {
+      this.router.navigate(['user/userDetails']).then();
+    }, 1000);
   }
 }
