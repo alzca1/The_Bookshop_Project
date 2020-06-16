@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserDetailsService {
-  loadedDetailsChanged = new EventEmitter<UserDetails[]>();
+  loadedDetailsChanged = new EventEmitter<any>();
   loadedDetails: UserDetails[] = [];
   constructor(private http: HttpClient) {}
 
@@ -52,7 +52,6 @@ export class UserDetailsService {
       token;
     return this.http.get(baseUrl).pipe(
       map((responseData) => {
-        console.log(responseData);
         this.loadedDetailsChanged.emit(responseData);
       })
     );
@@ -66,8 +65,7 @@ export class UserDetailsService {
       detailsId +
       '.json?auth=' +
       token;
-    console.log(baseUrl);
-    console.log(data);
+
     return this.http.patch(baseUrl, {
       firstName: data.firstName,
       surname: data.surname,
@@ -90,9 +88,9 @@ export class UserDetailsService {
       '.json?auth=' +
       token;
     this.http.delete(baseUrl).subscribe((response) => {
-      this.getUserDetails(userId, token).subscribe((response) => {
-        console.log('updating list');
-      });
+      this.getUserDetails(userId, token).subscribe((response) => {});
     });
   }
+
+  
 }

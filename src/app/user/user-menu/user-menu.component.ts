@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { WishlistService } from 'src/app/services/wishlist.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserMenuComponent implements OnInit, OnDestroy {
   userSub: Subscription;
   userName: string;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService,private wishlistService: WishlistService, private router: Router) {}
 
   onLogout() {
     this.authService.logout();
@@ -24,6 +25,12 @@ export class UserMenuComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  onLoadingWishlist(){
+    const user = JSON.parse(localStorage.getItem('userData')); 
+    this.wishlistService.fetchWishList(user.id, user._token);
+  }
+
 
   ngOnDestroy() {
     this.userSub.unsubscribe();

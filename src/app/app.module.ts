@@ -28,6 +28,7 @@ import { UserMenuComponent } from './user/user-menu/user-menu.component';
 import { EditPasswordAuthComponent } from './user/edit-password-auth/edit-password-auth.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserDetailsFormComponent } from './user/user-details/user-details-form/user-details-form.component';
+import { UserWishlistComponent } from './user/user-wishlist/user-wishlist.component';
 
 const appRoutes: Route[] = [
   {
@@ -92,6 +93,10 @@ const appRoutes: Route[] = [
       {
         path: 'userDetailsForm/:id', 
         component: UserDetailsFormComponent
+      },
+      {
+        path: 'wishlist', 
+        component: UserWishlistComponent
       }
     ],
   },
@@ -117,6 +122,7 @@ const appRoutes: Route[] = [
     EditPasswordAuthComponent,
     UserDetailsComponent,
     UserDetailsFormComponent,
+    UserWishlistComponent,
   ],
   imports: [
     CommonModule,

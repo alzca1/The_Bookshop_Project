@@ -1,14 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserDetailsService } from 'src/app/services/userDetails.service';
-import { NgForm } from '@angular/forms';
 import { UserDetails } from 'src/app/user/userDetails.model';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -26,18 +18,18 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
-    console.log('ngOnInit called!');
+    console.log('is Loading: ' + this.isLoading);
 
     this.userId = JSON.parse(localStorage.getItem('userData'));
     this.onGetDetails();
     this.sub = this.userDetailsService.loadedDetailsChanged.subscribe(
       (updatedDetails: UserDetails[]) => {
         this.details = updatedDetails;
-        console.log('hello from subscribe')
+       
       }
-      );
-      this.isLoading = false;
-      
+    );
+    this.isLoading = false;
+    console.log('is Loading: ' + this.isLoading);
   }
 
   ngOnDestroy(): void {
@@ -45,11 +37,14 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
   onGetDetails() {
     this.isLoading = true;
+    console.log('is Loading: ' + this.isLoading);
     this.userDetailsService
       .getUserDetails(this.userId.id, this.userId._token)
       .subscribe((responseData) => {
         console.log(responseData);
       });
+    this.isLoading = false;
+    console.log('is Loading: ' + this.isLoading);
   }
 
   onDeleteDetail(detailId) {

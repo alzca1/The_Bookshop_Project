@@ -3,24 +3,26 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Book } from 'src/app/book.interface';
 import { ServerService } from 'src/app/services/server.service';
 import { CartService } from 'src/app/services/cart.service';
-
+import { WishlistService } from '../../services/wishlist.service';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css'],
-  encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
 export class BookDetailComponent implements OnInit {
   id: string;
   loadedBook: Book;
   loadingBook: boolean;
+  onWishList: boolean;
+  wishList: Book[]; 
 
   constructor(
     private route: ActivatedRoute,
     private srvservice: ServerService,
     private router: Router,
-    private cartservice: CartService
+    private cartservice: CartService,
+    private wishlistService: WishlistService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class BookDetailComponent implements OnInit {
       this.route.params.subscribe((params: Params) => {
         this.id = params['id'];
       });
-
+    this.checkBookOnWishList(); 
     this.onFetchPosts();
     this.srvservice.loadedBooksChanged.subscribe((updatedBooks) => {
       for (let key in updatedBooks) {
@@ -67,9 +69,26 @@ export class BookDetailComponent implements OnInit {
     }
   }
 
-  onAddToCart(){
-
+  onAddToCart() {
     this.cartservice.addToCart(this.loadedBook);
-    console.log(this.loadedBook)
+    console.log(this.loadedBook);
+  }
+
+  onAddToWishlist(){
+    const user = JSON.parse(localStorage.getItem('userData'))
+    this.wishlistService.addToWishlist(this.loadedBook,user.id, user._token);
+    this.onWishList = true; 
+  }
+
+  checkBookOnWishList(){
+    this.wishlistService.fetchWishList(this.wishlistService.user.id, this.wishlistService.user._token);
+    this.wishlistService.loadedWishListChanged.subscribe(wishList => {
+      this.wishList = wishList;
+      if(this.wishList.some( book => book.id === this.id)){
+        console.log('book already in wishlist!')
+        this.onWishList = true; 
+      } 
+    })
+    console.log('wishlist check finished!')
   }
 }

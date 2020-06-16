@@ -2,13 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Book } from '../book.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class ServerService {
   loadedBooksChanged = new EventEmitter<Book[]>();
   loadedBooks: Book[] = [];
+  user = JSON.parse(localStorage.getItem('userData'));
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  submitBook(book: Book) {
+    this.http
+      .post('https://proyectoangular-5f739.firebaseio.com/books.json', book)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+    setTimeout(() => {
+      this.router.navigate(['/books']);
+    }, 2000);
+  }
 
   fetchBooks() {
     this.loadedBooks = [];

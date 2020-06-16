@@ -30,7 +30,7 @@ export class AuthService {
 
   changeEmail(newEmail: string){
     const idToken = JSON.parse(localStorage.getItem('userData'))
-    console.log(idToken._token);
+    
     return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + environment.firebaseAPIKey,
     {
       idToken: idToken._token , 
@@ -121,9 +121,9 @@ export class AuthService {
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
-      console.log('hello');
+      
       this.autoLogout(expirationDuration);
-      console.log('autologin completed!');
+      
     }
   }
 
@@ -139,8 +139,8 @@ export class AuthService {
 
   autoLogout(expirationDuration: number) {
     this.tokenExpirationTimer = setTimeout(() => {
-      console.log('calling logout!');
-      console.log(expirationDuration);
+      
+      
       this.logout();
     }, expirationDuration);
   }
@@ -177,4 +177,6 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
+
+ 
 }

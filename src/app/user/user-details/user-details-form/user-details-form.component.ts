@@ -110,4 +110,6 @@ export class UserDetailsFormComponent implements OnInit {
       this.router.navigate(['user/userDetails']).then();
     }, 1000);
   }
+
+ 
 }
