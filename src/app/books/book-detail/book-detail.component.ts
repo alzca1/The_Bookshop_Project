@@ -28,7 +28,7 @@ export class BookDetailComponent implements OnInit {
 
   ngOnInit(): void {
     // recibimos el id del libro y su booleano de wishlist si
-    // aparece en la ruta que lo trae hasta aquí
+    // aparecen params y fragment en la ruta que lo trae hasta aquí
     (this.id = this.route.snapshot.params['id']),
       this.route.params.subscribe((params: Params) => {
         this.id = params['id'];
@@ -39,9 +39,11 @@ export class BookDetailComponent implements OnInit {
       }
     });
 
-
+    // compruebo si el libro está en la wishList
     this.checkBookOnWishList();
+    // descargo lista de todos los libros
     this.onFetchBooks();
+    // me subscribo a la lista de libros descargados
     this.srvservice.loadedBooksChanged.subscribe((updatedBooks) => {
       for (let key in updatedBooks) {
         if (updatedBooks[key].id === this.id) {
@@ -49,8 +51,10 @@ export class BookDetailComponent implements OnInit {
         }
       }
     });
-
+// me subscribo a la lista de libros de la wishlist descargados
     this.wishlistService.loadedWishListChanged.subscribe((wishlistBooks) => {});
+
+    // fin del init
   }
 
   onFetchBooks() {
