@@ -60,6 +60,7 @@ export class ServerService {
       cover: book.cover,
       id: book.id,
       price: book.price,
+      stock: book.stock,
       title: book.title,
       summary: book.summary
     });

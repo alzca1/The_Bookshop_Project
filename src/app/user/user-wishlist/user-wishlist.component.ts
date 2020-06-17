@@ -32,6 +32,7 @@ export class UserWishlistComponent implements OnInit {
     
   }
 
+  
  
   
 }

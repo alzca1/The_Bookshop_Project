@@ -39,6 +39,18 @@
     </div>
 
     <div class="form-group">
+      <label for="stock">Stock</label>
+      <input
+        type="number"
+        name="stock"
+        class="form-control"
+        id="stock"
+        placeholder="Add book stock"
+        [(ngModel)]="book.stock"
+      />
+    </div>
+
+    <div class="form-group">
       <label for="cover">Cover URL</label>
       <input
         type="text"

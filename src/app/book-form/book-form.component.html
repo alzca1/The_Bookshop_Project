@@ -1,35 +1,83 @@
-<h1 class="text-center"> Book Form</h1>
+<h1 class="text-center">Book Form</h1>
 
 <div class="formContainer w-50 mx-auto">
   <form (ngSubmit)="onSubmit()" #bookForm="ngForm">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" name="title" class="form-control" id="title" placeholder="Add title" ngModel>
+      <input
+        type="text"
+        name="title"
+        class="form-control"
+        id="title"
+        placeholder="Add title"
+        ngModel
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="author">Author</label>
-      <input type="text" name="author" class="form-control" id="author" placeholder="Add author" ngModel>
+      <input
+        type="text"
+        name="author"
+        class="form-control"
+        id="author"
+        placeholder="Add author"
+        ngModel
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="price">price</label>
-      <input type="number" name="price" class="form-control" id="price" placeholder="Add price" ngModel>
+      <input
+        type="number"
+        name="price"
+        class="form-control"
+        id="price"
+        placeholder="Add price"
+        ngModel
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="stock">Stock</label>
-      <input type="number" name="stock" class="form-control" id="stock" placeholder="Add book stock" ngModel>
+      <input
+        type="number"
+        name="stock"
+        class="form-control"
+        id="stock"
+        placeholder="Add book stock"
+        ngModel
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="cover">Cover URL</label>
-      <input type="text" name="cover" class="form-control" id="cover" placeholder="Add cover url" ngModel>
+      <input
+        type="text"
+        name="cover"
+        class="form-control"
+        id="cover"
+        placeholder="Add cover url"
+        ngModel
+        required
+      />
     </div>
     <div class="form-group">
       <label for="summary">Summary</label>
-      <textarea type="text" name="summary" class="form-control" id="summary" placeholder="Add book summary" ngModel></textarea>
+      <textarea
+        type="text"
+        name="summary"
+        class="form-control"
+        id="summary"
+        placeholder="Add book summary"
+        ngModel
+        required
+      ></textarea>
     </div>
-    <button class="btn btn-primary"  type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 </div>

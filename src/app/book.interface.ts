@@ -7,6 +7,7 @@ export interface Book {
   summary: string
   stock:number
   cartAmount?: number,
+  wishId?: string
 }
 
 

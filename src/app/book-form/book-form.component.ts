@@ -19,16 +19,7 @@ export class BookFormComponent implements OnInit {
       this.srvService.submitBook(this.bookForm.value);
     }
 
-  // onSubmit(book: Book) {
-  //   this.http
-  //     .post('https://proyectoangular-5f739.firebaseio.com/books.json', book)
-  //     .subscribe((responseData) => {
-  //       console.log(responseData);
-  //     });
-  //   setTimeout(() => {
-  //     this.router.navigate(['/books']);
-  //   }, 2000);
-  // }
+ 
 
   ngOnInit(): void {}
 }

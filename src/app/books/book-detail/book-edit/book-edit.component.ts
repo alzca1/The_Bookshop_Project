@@ -26,21 +26,20 @@ export class BookEditComponent implements OnInit {
     });
     this.srvservice.loadedBooksChanged.subscribe((loadedBooks) => {
       this.books = loadedBooks;
-      console.log(this.books);
-      console.log(this.id);
+     
     });
     this.getBook(this.id);
   }
 
   getBook(id) {
     this.srvservice.fetchBooks().subscribe((books) => {
-      console.log('books loaded');
+  
     });
     if (Object.entries(this.srvservice.loadedBooks).length > 0) {
       this.books = this.srvservice.loadedBooks;
     } else {
       this.srvservice.fetchBooks().subscribe((loadedBooks) => {
-        console.log('books loaded!');
+       
         this.books = this.srvservice.loadedBooks;
         for (let key in this.books) {
           if (this.books[key].id === this.id) {

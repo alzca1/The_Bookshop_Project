@@ -39,7 +39,7 @@
       <hr>
       <div class="text-center">
         <button class="btn btn-primary w-75 mb-2" (click)="onAddToCart()">Add to Cart</button>
-        <button class="btn btn-info w-75 mb-2" (click)="onAddToWishlist()" [disabled]="onWishList">{{onWishList? "Already in Wishlist" : "Add to Wishlist"}}</button>
+        <button class="btn btn-info w-75 mb-2" (click)="onHandleBookInWishlist()" >{{onWishList? "Remove from Wishlist" : "Add to Wishlist"}}</button>
         <button class="btn btn-success w-75 mb-2" [routerLink]="['/edit', loadedBook.id]" >Edit Book</button>
         <button class="btn btn-danger w-75 mb-2" (click)="onDeleteBook()">Delete Book</button>
       </div>

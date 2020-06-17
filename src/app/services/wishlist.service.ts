@@ -13,21 +13,19 @@ export class WishlistService {
   constructor(private http: HttpClient) {}
 
   addToWishlist(bookId, userId, token) {
-    this.fetchWishList(userId, token); 
+    this.fetchWishList(userId, token);
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       userId +
       '/wishlist.json?auth=' +
       token;
-    if(!this.loadedWishList.some(element => {
-      console.log("hello",element.id)
-      console.log("bye",bookId)
-      element.id == bookId
-    })){
-      return this.http.post(baseUrl, bookId).subscribe((response) => {
-        console.log(response);
-      });
-    }else{
+    if (
+      !this.loadedWishList.some((element) => {
+        element.id == bookId;
+      })
+    ) {
+      return  this.http.post(baseUrl, bookId)
+    } else {
       console.log('book already in wishlist');
     }
   }
@@ -45,21 +43,31 @@ export class WishlistService {
         map((responseData) => {
           for (let key in responseData) {
             if (
-              !this.loadedWishList.some((book) => book.id === responseData[key].id)
+              !this.loadedWishList.some(
+                (book) => book.id === responseData[key].id
+              )
             ) {
-              this.loadedWishList.push({ ...responseData[key] });
+              this.loadedWishList.push({ ...responseData[key], wishId:key });
               this.loadedWishListChanged.emit(this.loadedWishList.slice());
             }
           }
-          console.log(this.loadedWishList);
         })
       )
-      .subscribe((response) => {
-        console.log('list fetched and transmitted');
-      });
+      .subscribe((response) => {});
   }
 
-  // checkDuplicity(){
-  //   this.fetchWishList(userId, token)
-  // }
+  removeFromWishlist(wishId,userId,token) {
+    console.log(wishId)
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      userId +
+      '/wishlist/' + wishId + '.json?auth=' +
+      token;
+      console.log(wishId)
+       this.http.delete(baseUrl).subscribe((response) => {
+        console.log(response);
+      }, error => {
+        console.log(error)
+      });
+  }
 }

@@ -36,6 +36,7 @@ export class UserDetailsFormComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.addressId = params['id'];
     });
+    
     if (this.addressId) {
       this.onGetDetail();
 
