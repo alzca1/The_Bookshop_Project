@@ -1,3 +1,29 @@
-<div *ngFor="let book of loadedWishList">
-  <h6> <a [routerLink]="['../../detail', book.id]" [fragment]="true" routerLinkActive="router-link-active" >{{ book.title }}</a></h6>
+<div class="d-flex justify-content-center mt-5">
+  <div
+    class="spinner-border text-primary"
+    *ngIf="loadingWishList"
+    style="width: 3rem; height: 3rem;"
+  >
+    <span class="sr-only text-center">Loading</span>
+  </div>
+</div>
+
+<h3 *ngIf="!loadingWishList && loadedWishList.length < 1 ">Your wishlist is empty!</h3>
+<div class="container mt-5" *ngIf="loadedWishList">
+  <div class="row">
+    <div
+      class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5 mx-3 d-flex justify-content-center "
+      *ngFor="let book of loadedWishList"
+    >
+      <div class="bookContainer ">
+        <a class=""
+          [routerLink]="['../../detail', book.id]"
+          [fragment]="true"
+          routerLinkActive="router-link-active"
+        >
+          <img src="{{ book.cover }}"
+        /></a>
+      </div>
+    </div>
+  </div>
 </div>

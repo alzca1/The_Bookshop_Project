@@ -37,7 +37,7 @@ export class WishlistService {
       userId +
       '/wishlist.json?auth=' +
       token;
-    this.http
+    return this.http
       .get(baseUrl)
       .pipe(
         map((responseData) => {
@@ -53,7 +53,6 @@ export class WishlistService {
           }
         })
       )
-      .subscribe((response) => {});
   }
 
   removeFromWishlist(wishId,userId,token) {

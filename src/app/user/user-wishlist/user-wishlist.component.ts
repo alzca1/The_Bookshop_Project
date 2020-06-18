@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-wishlist.component.css'],
 })
 export class UserWishlistComponent implements OnInit {
+  loadingWishList: boolean; 
   loadedWishList: Book[] = [];
   book: Book;
   constructor(private wishlistService: WishlistService, private route: Router) {}
@@ -18,19 +19,22 @@ export class UserWishlistComponent implements OnInit {
     this.onGetWishList(); 
     this.wishlistService.loadedWishListChanged.subscribe((responseData) => {
       this.loadedWishList = responseData;
+      
     });
   }
 
   onGetWishList() {
+    this.loadingWishList = true; 
     this.loadedWishList = []; 
     const user = JSON.parse(localStorage.getItem('userData'));
-    this.wishlistService.fetchWishList(user.id, user._token);
+    this.wishlistService.fetchWishList(user.id, user._token).subscribe((response) => {
+      console.log("wishlist fetched")
+      this.loadingWishList = false; 
+    });
+  
   }
 
-  getWishlist(){
-    console.log(this.loadedWishList)
-    
-  }
+  
 
   
  

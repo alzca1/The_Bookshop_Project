@@ -17,7 +17,7 @@ export class BookDetailComponent implements OnInit {
   loadingBook: boolean;
   onWishList: boolean;
   wishList: Book[];
-
+  postResponse: {name: string};
   constructor(
     private route: ActivatedRoute,
     private srvservice: ServerService,
@@ -95,10 +95,10 @@ export class BookDetailComponent implements OnInit {
     console.log(this.loadedBook);
     console.log(user.id);
     if (!this.onWishList) {
-      this.wishlistService.addToWishlist(this.loadedBook, user.id, user._token).subscribe((response) => {
+      this.wishlistService.addToWishlist(this.loadedBook, user.id, user._token).subscribe((response:any) => {
         console.log('response from addToWishList')
         this.wishId = response.name
-        console.log(response.name);
+        console.log(response);
       });;
       // meter aquí la referencia que nos sirve el subscribe de addToWishList
       // this.checkBookOnWishList();
@@ -113,12 +113,16 @@ export class BookDetailComponent implements OnInit {
     }
   }
 
+
+
   checkBookOnWishList() {
     // hago un get para conseguir la wishlist
     this.wishlistService.fetchWishList(
       this.wishlistService.user.id,
       this.wishlistService.user._token
-    );
+    ).subscribe(response => {
+      return;
+    });
     // me subscribo a la variable que recoge la lista de la wishlist
     this.wishlistService.loadedWishListChanged.subscribe((wishList) => {
       const wishBook = wishList.filter((book) => book.id === this.id)

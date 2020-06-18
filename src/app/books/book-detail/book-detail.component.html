@@ -33,7 +33,9 @@
       <div class="text-center smallerText">
         <p class="text-danger mb-0 mt-2">5€</p>
         <p>Final product price</p>
-        <h6 class="text-success">In Stock</h6>
+        <h6 class="text-danger" *ngIf="!loadedBook.stock">Out of stock</h6>
+        <h6 class="text-success" *ngIf="loadedBook.stock > 5">In stock</h6>
+        <h6 class="text-warning" *ngIf="loadedBook.stock < 5">Only {{loadedBook.stock}} units in stock</h6>
         <p>Free delivery next Sunday. <a href="#">See details</a></p>
       </div>
       <hr>
