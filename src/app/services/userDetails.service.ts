@@ -38,6 +38,7 @@ export class UserDetailsService {
               this.loadedDetailsChanged.emit(this.loadedDetails);
             }
           }
+          console.log(this.loadedDetails)
         })
       );
   }

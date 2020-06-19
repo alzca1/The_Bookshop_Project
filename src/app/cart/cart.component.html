@@ -1,12 +1,12 @@
-<div class="text-center mt-5" *ngIf="updatedCart.length === 0">
+<div class="text-center mt-5" *ngIf="updatedServerCart.length === 0">
   <h1>The cart is empty</h1>
   <fa-icon class="fa-5x" [icon]="faFrown"></fa-icon>
 </div>
-<div class="genContainer container" *ngIf="updatedCart.length > 0">
+<div class="genContainer container" *ngIf="updatedServerCart.length > 0">
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 col-xl-9">
       <div
-        *ngFor="let book of updatedCart"
+        *ngFor="let book of updatedServerCart"
         class="container bookContainer d-flex align-items-center mx-0"
       >
         <div>
@@ -25,8 +25,16 @@
             <small class="bookPrice"> {{ book.price }}€</small>
           </div>
         </div>
-        <div class="bookAmount container">
-          <p>x {{ book.cartAmount }}</p>
+        <div class="container">
+          <label for="amount">Amount:</label>
+          <select class="custom-select custom-select-sm amountSelect" (change)="onChange($event.target.value, book.id)" id="amount">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
         </div>
       </div>
     </div>
