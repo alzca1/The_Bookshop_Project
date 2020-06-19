@@ -22,12 +22,14 @@ export class CartComponent implements OnInit {
   }[];
   updatedServerCart = [];
   total: number;
-  startingAmount = 1;
+  amount = [0, 1, 2, 3, 4, 5];
   constructor(private cartservice: CartService) {}
 
   ngOnInit(): void {
     this.updatedServerCart = [];
-    this.cartservice.fetchFromServer();
+    this.cartservice.fetchFromServer().subscribe((response) => {
+      console.log(response);
+    });
     this.cartservice.loadedServerCartChanged.subscribe((response) => {
       this.updatedServerCart = response;
       console.log(this.updatedServerCart);
@@ -40,14 +42,19 @@ export class CartComponent implements OnInit {
     this.total = Number(this.cartservice.getTotal(this.updatedServerCart));
   }
 
-  onChange(value, id) {
-    this.cartservice.cart.forEach((element) => {
-      if (element.id === id) {
-        element.cartAmount = value;
-        this.cartservice.updateInServer(value);
-        console.log(element);
-      }
-    });
-    this.onGetTotal();
+  
+
+  onChange(value, cartId) {
+    if (value != 0) {
+      this.cartservice.updateInServer(cartId, value);
+      this.onGetTotal();
+    } else {
+      let index = this.updatedServerCart.findIndex(
+        (element) => element.cartId === cartId
+      );
+      this.updatedServerCart.splice(0, 1);
+      this.onGetTotal();
+      this.cartservice.removeFromServer(cartId);
+    }
   }
 }

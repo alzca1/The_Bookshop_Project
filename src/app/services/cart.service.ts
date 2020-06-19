@@ -49,7 +49,6 @@ export class CartService {
   // }
 
   getTotal(cart) {
-    console.log('getTotal', cart);
     let total = 0;
     for (let key in cart) {
       total += cart[key].price * cart[key].cartAmount;
@@ -106,7 +105,6 @@ export class CartService {
       cartId +
       '.json?auth=' +
       this.user._token;
-
     return this.http
       .patch(baseUrl, {
         cartAmount: amount,
@@ -136,11 +134,22 @@ export class CartService {
             this.loadedServerCartChanged.emit(this.loadedServerCart.slice());
           }
         }
-        console.log(typeof this.loadedServerCart);
       })
     );
   }
 
+  removeFromServer(cartId){
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      this.user.id +
+      '/cart/' +
+      cartId +
+      '.json?auth=' +
+      this.user._token;
+      this.http.delete(baseUrl,cartId).subscribe(response => {
+        console.log('element deleted from cart')
+      })
+  }
   // añadir nueva cantidad al elemento guardado en el cart en el servidor
 
   handlePost(baseUrl, book) {

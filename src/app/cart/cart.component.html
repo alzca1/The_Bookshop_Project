@@ -27,13 +27,8 @@
         </div>
         <div class="container">
           <label for="amount">Amount:</label>
-          <select class="custom-select custom-select-sm amountSelect" (change)="onChange($event.target.value, book.id)" id="amount">
-            <option value="0">0</option>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+          <select class="custom-select custom-select-sm amountSelect" [(ngModel)]="book.cartAmount" (change)="onChange($event.target.value, book.cartId)" id="amount">
+           <option *ngFor="let number of amount">{{number}}</option>
           </select>
         </div>
       </div>
