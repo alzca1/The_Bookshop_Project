@@ -14,7 +14,8 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-xs-12">
-          <div class="border p-4 mb-2 addressContainer">
+          <div class=" p-4 mb-2 addressContainer" [ngClass]="detail.primary? 'border-success': 'border'">
+            <small class="text-center text-success mb-3" *ngIf="detail.primary"> Primary Address</small>
             <h5>{{ detail.firstName }} {{ detail.surname }}</h5>
             <h6>{{ detail.address1 }} - {{ detail.postCode }}</h6>
             <h6>{{ detail.city }} ({{ detail.country }}</h6>
@@ -48,4 +49,5 @@
   >
     Add Address
   </button>
+  
 </div>

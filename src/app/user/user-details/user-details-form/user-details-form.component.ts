@@ -36,7 +36,7 @@ export class UserDetailsFormComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.addressId = params['id'];
     });
-    
+
     if (this.addressId) {
       this.onGetDetail();
 
@@ -53,6 +53,7 @@ export class UserDetailsFormComponent implements OnInit {
             postCode: new FormControl(this.details.postCode),
             city: new FormControl(this.details.city),
             country: new FormControl(this.details.country),
+            primary: new FormControl(this.details.primary),
           });
           this.isReady = true;
         }
@@ -67,6 +68,7 @@ export class UserDetailsFormComponent implements OnInit {
         postCode: new FormControl(null),
         city: new FormControl(null),
         country: new FormControl(null),
+        primary: new FormControl(null),
       });
       this.isReady = true;
     }
@@ -75,11 +77,10 @@ export class UserDetailsFormComponent implements OnInit {
   onSubmit() {
     console.log('submitting');
     const userDetails = this.userForm.value;
-    this.userDetailsService.submitUserDetails(
-      userDetails,
-      this.userId,
-      this.token
-    );
+    if(userDetails.primary === true){
+      this.userDetailsService.primaryHandler()
+    }
+    this.userDetailsService.submitUserDetails(userDetails);
     setTimeout(() => {
       this.router.navigate(['user/userDetails']).then();
     }, 1000);
@@ -87,23 +88,19 @@ export class UserDetailsFormComponent implements OnInit {
 
   onGetDetail() {
     this.userDetailsService
-      .getUserDetail(this.userId, this.addressId, this.token)
-      .subscribe(
-        (responseData) => {
-          console.log(responseData);
-        }
-      );
+      .getUserDetail(this.addressId)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
   }
 
   onPatchDetails() {
-    console.log('patching');
+    const userDetails = this.userForm.value;
+   if(userDetails.primary === true){
+     this.userDetailsService.primaryHandler()
+   }
     this.userDetailsService
-      .patchDetails(
-        this.userId,
-        this.addressId,
-        this.userForm.value,
-        this.token
-      )
+      .patchDetails(this.addressId, userDetails)
       .subscribe((data) => {
         console.log('Put was successful', data);
       });
@@ -112,5 +109,13 @@ export class UserDetailsFormComponent implements OnInit {
     }, 1000);
   }
 
- 
+  onChange(event) {
+    console.log(this.userForm.value)
+    if (event.target.checked) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

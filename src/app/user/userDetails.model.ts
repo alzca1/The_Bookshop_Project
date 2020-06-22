@@ -5,9 +5,10 @@ export class UserDetails {
     public birthDate: Date,
     public address1: string,
     public address2: string,
-    public postCode: number,
+    public postCode: string,
     public city: string,
     public country: string,
-    private id?: string,
+    public primary?: boolean, 
+    public id?: string,
   ) {}
 }

@@ -25,7 +25,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.sub = this.userDetailsService.loadedDetailsChanged.subscribe(
       (updatedDetails: UserDetails[]) => {
         this.details = updatedDetails;
-       
+        this.orderDetails(); 
       }
     );
     this.isLoading = false;
@@ -38,11 +38,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   onGetDetails() {
     this.isLoading = true;
     console.log('is Loading: ' + this.isLoading);
-    this.userDetailsService
-      .getUserDetails(this.userId.id, this.userId._token)
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+    this.userDetailsService.getUserDetails().subscribe((responseData) => {
+      console.log(responseData);
+    });
     this.isLoading = false;
     console.log('is Loading: ' + this.isLoading);
   }
@@ -51,10 +49,14 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     const detail = this.details.findIndex((item) => item.id === detailId);
     this.details.splice(detail, 1);
     console.log(this.details);
-    this.userDetailsService.deleteDetail(
-      this.userId.id,
-      detailId,
-      this.userId._token
-    );
+    this.userDetailsService.deleteDetail(detailId);
+  }
+
+  orderDetails(){
+    console.log('sorting')
+    console.log(this.details)
+    this.details.sort((a, b)=> {
+      return b.primary - a.primary || b.surname - a.surname || b.name - a.name;
+    })
   }
 }

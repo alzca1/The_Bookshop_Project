@@ -3,6 +3,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Book } from 'src/app/book.interface';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faFrown } from '@fortawesome/free-regular-svg-icons';
+import { UserDetailsService } from 'src/app/services/userDetails.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,12 +21,19 @@ export class CartComponent implements OnInit {
     cartAmount: number;
     price: number;
   }[];
+  isLoading = false;
   updatedServerCart = [];
   total: number;
   amount = [0, 1, 2, 3, 4, 5];
-  constructor(private cartservice: CartService) {}
+  loadedDetails = [];
+  primaryAddress;
+  constructor(
+    private cartservice: CartService,
+    private userDetailsService: UserDetailsService
+  ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.updatedServerCart = [];
     this.cartservice.fetchFromServer().subscribe((response) => {
       console.log(response);
@@ -35,14 +43,25 @@ export class CartComponent implements OnInit {
       console.log(this.updatedServerCart);
       this.onGetTotal();
     });
+    this.userDetailsService.getUserDetails().subscribe((response) => {
+      console.log(response);
+    });
+    this.userDetailsService.loadedDetailsChanged.subscribe((response) => {
+      this.loadedDetails = response;
+      if (this.loadedDetails) {
+        this.primaryAddress = {
+          ...this.loadedDetails.filter((element) => element.primary == true)[0],
+        };
+        console.log(this.primaryAddress);
+      }
+    });
+    this.isLoading = false;
   }
 
   onGetTotal() {
     console.log('onGetTotal', this.updatedServerCart);
     this.total = Number(this.cartservice.getTotal(this.updatedServerCart));
   }
-
-  
 
   onChange(value, cartId) {
     if (value != 0) {

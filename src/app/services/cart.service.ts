@@ -20,34 +20,6 @@ export class CartService {
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  // addToCart(book) {
-  //   let cartBook = {
-  //     id: book.id,
-  //     title: book.title,
-  //     author: book.author,
-  //     cover: book.cover,
-  //     cartAmount: 1,
-  //     price: book.price,
-  //   };
-  //   // comprueba duplicidad. Hace un map de todas las id's de los libros
-  //   // y se guarda en existingIds. Si existingIds no contiene el book.id,
-  //   // se hace push del libro. De lo contrario, averiguamos el índice del
-  //   // libro a partir de su id y le añadimos una unidad más.
-  //   const existingIds = this.cart.map((addedBook) => addedBook.id);
-  //   if (!existingIds.includes(book.id)) {
-  //     this.cart.push({ ...cartBook });
-  //     this.addToServer(cartBook, this.user.id, this.user._token);
-  //   } else {
-  //     this.cart[this.cart.findIndex((el) => el.id === book.id)].cartAmount += 1;
-  //   }
-
-  //   this.cartChanged.emit(this.cart.slice());
-
-  //   setTimeout(() => {
-  //     this.router.navigate(['/cart']);
-  //   }, 300);
-  // }
-
   getTotal(cart) {
     let total = 0;
     for (let key in cart) {
@@ -90,7 +62,7 @@ export class CartService {
       if (this.index == null) {
         this.handlePost(baseUrl, cartBook);
       } else {
-        const newAmount = this.loadedServerCart[this.index].cartAmount + 1;
+        const newAmount = +this.loadedServerCart[this.index].cartAmount + 1;
         const cartId = this.loadedServerCart[this.index].cartId;
         this.updateInServer(cartId, newAmount);
       }
@@ -138,7 +110,7 @@ export class CartService {
     );
   }
 
-  removeFromServer(cartId){
+  removeFromServer(cartId) {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       this.user.id +
@@ -146,9 +118,9 @@ export class CartService {
       cartId +
       '.json?auth=' +
       this.user._token;
-      this.http.delete(baseUrl,cartId).subscribe(response => {
-        console.log('element deleted from cart')
-      })
+    this.http.delete(baseUrl, cartId).subscribe((response) => {
+      console.log('element deleted from cart');
+    });
   }
   // añadir nueva cantidad al elemento guardado en el cart en el servidor
 

@@ -8,27 +8,28 @@ export class UserDetailsService {
   loadedDetailsChanged = new EventEmitter<any>();
   loadedDetails: UserDetails[] = [];
   constructor(private http: HttpClient) {}
+  user = JSON.parse(localStorage.getItem('userData'));
 
-  submitUserDetails(details: UserDetails, userId, token) {
+  submitUserDetails(details: UserDetails) {
     this.http
       .post(
         'https://proyectoangular-5f739.firebaseio.com/users/' +
-          userId +
+          this.user.id +
           '/details.json?auth=' +
-          token,
+          this.user._token,
         details
       )
       .subscribe((responseData) => {});
   }
 
-  getUserDetails(userId, token) {
+  getUserDetails() {
     this.loadedDetails = [];
     return this.http
       .get(
         'https://proyectoangular-5f739.firebaseio.com/users/' +
-          userId +
+          this.user.id +
           '/details.json?auth=' +
-          token
+          this.user._token
       )
       .pipe(
         map((responseData) => {
@@ -38,19 +39,19 @@ export class UserDetailsService {
               this.loadedDetailsChanged.emit(this.loadedDetails);
             }
           }
-          console.log(this.loadedDetails)
+          console.log(this.loadedDetails);
         })
       );
   }
 
-  getUserDetail(userId, addressId, token) {
+  getUserDetail(addressId) {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
-      userId +
+      this.user.id +
       '/details/' +
       addressId +
       '.json?auth=' +
-      token;
+      this.user._token;
     return this.http.get(baseUrl).pipe(
       map((responseData) => {
         this.loadedDetailsChanged.emit(responseData);
@@ -58,14 +59,14 @@ export class UserDetailsService {
     );
   }
 
-  patchDetails(userId, detailsId, data, token) {
+  patchDetails(addressId, data) {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
-      userId +
+      this.user.id +
       '/details/' +
-      detailsId +
+      addressId +
       '.json?auth=' +
-      token;
+      this.user._token;
 
     return this.http.patch(baseUrl, {
       firstName: data.firstName,
@@ -77,21 +78,33 @@ export class UserDetailsService {
       postCode: data.postCode,
       city: data.city,
       country: data.country,
+      primary: data.primary,
     });
   }
 
-  deleteDetail(userId, detailsId, token) {
+  deleteDetail(detailsId) {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
-      userId +
+      this.user.id +
       '/details/' +
       detailsId +
       '.json?auth=' +
-      token;
+      this.user._token;
     this.http.delete(baseUrl).subscribe((response) => {
-      this.getUserDetails(userId, token).subscribe((response) => {});
+      this.getUserDetails().subscribe((response) => {});
     });
   }
 
-  
+  primaryHandler() {
+    const item = this.loadedDetails.filter((item) => item.primary == true)[0];
+    if (item) {
+      this.patchDetails(item.id, {
+        primary: false,
+      }).subscribe((response) => {
+        console.log(response);
+      });
+    }else{
+      return; 
+    }
+  }
 }
