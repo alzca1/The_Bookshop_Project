@@ -29,6 +29,7 @@ import { EditPasswordAuthComponent } from './user/edit-password-auth/edit-passwo
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserDetailsFormComponent } from './user/user-details/user-details-form/user-details-form.component';
 import { UserWishlistComponent } from './user/user-wishlist/user-wishlist.component';
+import { AddressModalComponent } from 'src/shared/addressModal/addressModal.component';
 
 const appRoutes: Route[] = [
   {
@@ -123,6 +124,7 @@ const appRoutes: Route[] = [
     UserDetailsComponent,
     UserDetailsFormComponent,
     UserWishlistComponent,
+    AddressModalComponent
   ],
   imports: [
     CommonModule,

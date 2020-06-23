@@ -1,4 +1,5 @@
 <div *ngIf="!isLoading || primaryAddress">
+  <app-address *ngIf="modal" (close)="onHandleClose()"></app-address>
   <div class="text-center mt-5" *ngIf="updatedServerCart.length === 0">
     <h1>The cart is empty</h1>
     <fa-icon class="fa-5x" [icon]="faFrown"></fa-icon>
@@ -52,7 +53,7 @@
           Ships to:
           <strong
             >{{ primaryAddress.postCode }} - {{ primaryAddress.city }}</strong
-          > <small><a href="#">(Change?)</a></small>
+          > <small><a [routerLink]="" type="button" (click)="onChangeAddress()">(Change?)</a></small>
         </h6> 
         <div class="collapse" id="shippingCollapse">
           <span

@@ -26,7 +26,8 @@ export class CartComponent implements OnInit {
   total: number;
   amount = [0, 1, 2, 3, 4, 5];
   loadedDetails = [];
-  primaryAddress;
+  public primaryAddress;
+  modal = false; 
   constructor(
     private cartservice: CartService,
     private userDetailsService: UserDetailsService
@@ -75,5 +76,14 @@ export class CartComponent implements OnInit {
       this.onGetTotal();
       this.cartservice.removeFromServer(cartId);
     }
+  }
+
+  onChangeAddress(){
+    console.log('hello')
+    this.modal = true; 
+  }
+
+  onHandleClose(){
+    this.modal = null; 
   }
 }

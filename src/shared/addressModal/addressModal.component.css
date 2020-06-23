@@ -1,0 +1,41 @@
+.backdrop{
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    min-height: 200vh;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(3px);
+    z-index: 50;
+    transition: 1s ease; 
+}
+
+.addressBox{
+    font-size: 0.9rem; 
+    border-radius: 10px;
+    position: fixed; 
+    top: 10vh; 
+    left: 10vw; 
+    width: 80vw;
+    padding: 16px; 
+    z-index: 100; 
+    background: white; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    transition: 1s ease; 
+}
+
+.addressItem{
+    border-radius: 5px;
+}
+
+input{
+    visibility: hidden;
+}
+
+.checked{
+    background-color: rgba(0, 123, 255, .20)
+}
+
+.unchecked{
+    background-color: white;
+}
