@@ -47,7 +47,7 @@ export class CartService {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       userId +
-      '/cart.json?auth=' +
+      '/cart/books.json?auth=' +
       token;
 
     const promise = this.fetchFromServer().toPromise();
@@ -96,7 +96,7 @@ export class CartService {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       this.user.id +
-      '/cart.json?auth=' +
+      '/cart/books.json?auth=' +
       this.user._token;
     return this.http.get(baseUrl).pipe(
       map((responseData) => {
@@ -114,7 +114,7 @@ export class CartService {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       this.user.id +
-      '/cart/' +
+      '/cart/books/' +
       cartId +
       '.json?auth=' +
       this.user._token;
@@ -135,6 +135,8 @@ export class CartService {
       console.log(response);
     });
   }
+
+  
 }
 
 // la idea sería crear dos funciones: una que sume solo 1 unidad (para

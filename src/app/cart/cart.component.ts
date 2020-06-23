@@ -83,7 +83,20 @@ export class CartComponent implements OnInit {
     this.modal = true; 
   }
 
+  onGetServerAddress(){
+
+  }
+
   onHandleClose(){
     this.modal = null; 
+  }
+
+  public setAddress(addressId){
+    console.log(addressId)
+    this.primaryAddress = {
+      ...this.loadedDetails.filter((element) => element.id == addressId)[0],
+    };
+    console.log(this.loadedDetails);
+    console.log(this.primaryAddress)
   }
 }

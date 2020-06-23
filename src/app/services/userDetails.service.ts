@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 export class UserDetailsService {
   loadedDetailsChanged = new EventEmitter<any>();
   loadedDetails: UserDetails[] = [];
+  cartDetails; 
   constructor(private http: HttpClient) {}
   user = JSON.parse(localStorage.getItem('userData'));
 
@@ -107,4 +108,29 @@ export class UserDetailsService {
       return; 
     }
   }
+
+
+  // setCartAddress(){
+  //     const baseUrl =
+  //   'https://proyectoangular-5f739.firebaseio.com/users/' +
+  //   this.user.id+
+  //   '/cart/address.json?auth=' +
+  //   this.user._token;
+  //   const shipmentAddress = this.loadedDetails.filter(detail => detail.primary === true)
+  //   this.http.post(baseUrl,primaryAddress).subscribe(response => {
+  //     console.log(response);
+  //   })
+  // }
+
+  // getCartAddress(){
+  //   const baseUrl =
+  //   'https://proyectoangular-5f739.firebaseio.com/users/' +
+  //   this.user.id+
+  //   '/cart/address.json?auth=' +
+  //   this.user._token;
+  //   this.http.get(baseUrl).subscribe(response => {
+  //     this.cartDetails = response; 
+  //   })
+  // }
+  
 }

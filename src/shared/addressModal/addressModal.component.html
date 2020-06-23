@@ -1,50 +1,53 @@
-<div (click)="onClose()"class="backdrop"></div>
-<div class="addressBox d-flex flex-column justify-content-center">
-  <span class="text-center mb-2">Please, choose your shipping address:</span>
-  <form #form="ngForm">
-    <div *ngFor="let item of loadedDetails" class=" my-2">
-      <div class="addressItem form-check pl-4 py-3 my-2" [ngClass]="{'checked': radio == item.id, 'unchecked': radio != item.id}">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="shippingAddress"
-          id="{{ item.id }}"
-          value="{{ item.id }}"
-          [(ngModel)]="radio"
-          
-          
-        />
-        <label class="form-check-label" for="{{ item.id }}">
-          <span
-            >{{ item.firstName }} {{ item.surname }} -
-          </span>
-          <br />
-          <span> {{ item.address1 }} </span> <br />
-          <div *ngIf="item.address2; else noAddress2">
-            <span> {{ item.address2 }}</span>
-            <br />
-            <span
-              >{{ item.city }} {{ item.postCode }} ({{
-                item.country
-              }})</span
-            >
-          </div>
-          <ng-template #noAddress2>
-            <span
-              >{{ item.city }} {{ item.postCode }} ({{
-                item.country
-              }})</span
-            >
-          </ng-template>
+<div *ngIf="loadedDetails.length > 0">
 
-          <!-- <span>{{ item.firstName }} {{ item.surname }}</span> <br />
-          <span>{{ item.address1 }} - {{item.address2}} </span><br/>
-          <span> {{item.city}} - {{ item.postCode }} ({{item.country}})</span> -->
-        </label>
-      </div>
+    <div (click)="onClose()"class="backdrop"></div>
+    <div class="addressBox d-flex flex-column justify-content-center">
+      <span class="text-center mb-2">Please, choose your shipping address:</span>
+      <form #form="ngForm">
+        <div *ngFor="let item of loadedDetails" class=" my-2">
+          <div class="addressItem form-check pl-4 py-1" [ngClass]="{'checked': radio == item.id, 'unchecked': radio != item.id}">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="shippingAddress"
+              id="{{ item.id }}"
+              value="{{ item.id }}"
+              [(ngModel)]="radio"
+              
+              
+            />
+            <label class="form-check-label" for="{{ item.id }}">
+              <span
+                >{{ item.firstName }} {{ item.surname }} -
+              </span>
+              <br />
+              <span> {{ item.address1 }} </span> <br />
+              <div *ngIf="item.address2; else noAddress2">
+                <span> {{ item.address2 }}</span>
+                <br />
+                <span
+                  >{{ item.city }} {{ item.postCode }} ({{
+                    item.country
+                  }})</span
+                >
+              </div>
+              <ng-template #noAddress2>
+                <span
+                  >{{ item.city }} {{ item.postCode }} ({{
+                    item.country
+                  }})</span
+                >
+              </ng-template>
+    
+              <!-- <span>{{ item.firstName }} {{ item.surname }}</span> <br />
+              <span>{{ item.address1 }} - {{item.address2}} </span><br/>
+              <span> {{item.city}} - {{ item.postCode }} ({{item.country}})</span> -->
+            </label>
+          </div>
+        </div>
+        <div class="addressBoxActions pt-2">
+          <button type="button" (click)="onSet()" class="btn btn-primary btn-sm btn-block">Set Address</button>
+        </div>
+      </form>
     </div>
-    <div class="addressBoxActions pt-2">
-      <button (click)="onSet()" class="btn btn-primary btn-sm btn-block">Set Address</button>
-    </div>
-  </form>
 </div>

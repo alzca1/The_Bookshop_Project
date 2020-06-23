@@ -53,34 +53,35 @@
           Ships to:
           <strong
             >{{ primaryAddress.postCode }} - {{ primaryAddress.city }}</strong
-          > <small><a [routerLink]="" type="button" (click)="onChangeAddress()">(Change?)</a></small>
-        </h6> 
+          >
+          <small
+            ><a [routerLink]="" type="button" (click)="onChangeAddress()"
+              >(Change?)</a
+            ></small
+          >
+        </h6>
         <div class="collapse" id="shippingCollapse">
           <span
-            >{{ primaryAddress.firstName }} {{ primaryAddress.surname }} - <a>Change?</a></span
+            >{{ primaryAddress.firstName }} {{ primaryAddress.surname }}</span
           >
           <br />
           <span> {{ primaryAddress.address1 }} </span> <br />
           <div *ngIf="primaryAddress.address2; else noAddress2">
             <span> {{ primaryAddress.address2 }}</span>
             <br />
-            <span 
+            <span
               >{{ primaryAddress.city }} {{ primaryAddress.postCode }} ({{
                 primaryAddress.country
               }})</span
             >
           </div>
           <ng-template #noAddress2>
-            <span 
+            <span
               >{{ primaryAddress.city }} {{ primaryAddress.postCode }} ({{
                 primaryAddress.country
               }})</span
             >
           </ng-template>
-          
-          <div class="d-flex justify-content-center mb-2">
-            <a class="tex-center" href=#>Change shipping address?</a>
-          </div>
         </div>
       </div>
       <div
