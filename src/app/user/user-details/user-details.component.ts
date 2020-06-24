@@ -27,10 +27,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.details = updatedDetails;
         if(this.details.length > 0){
           this.noDetails = false;
-          this.isLoading = false; 
         }
         this.orderDetails();
-       
       }
     );
     console.log('is Loading: ' + this.isLoading);

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center mt-5">
+<!-- <div class="d-flex justify-content-center mt-5">
   <div
     class="spinner-border text-primary"
     *ngIf="loadingWishList"
@@ -6,9 +6,18 @@
   >
     <span class="sr-only text-center">Loading</span>
   </div>
+</div> -->
+
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+  <div
+    class="spinner-border text-primary text-center spinner"
+    style="width: 3rem; height: 3rem;"
+  >
+    <span class="sr-only text-center">Loading</span>
+  </div>
 </div>
 
-<h3 *ngIf="!loadingWishList && loadedWishList.length < 1 ">Your wishlist is empty!</h3>
+<h3 *ngIf="!isLoading && loadedWishList.length < 1 ">Your wishlist is empty!</h3>
 <div class="container mt-5" *ngIf="loadedWishList">
   <div class="row">
     <div

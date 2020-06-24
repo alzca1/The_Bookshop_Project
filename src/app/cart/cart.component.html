@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading || primaryAddress">
+<div *ngIf="!isLoading">
   <app-address *ngIf="modal" (close)="onHandleClose()"></app-address>
   <div class="text-center mt-5" *ngIf="updatedServerCart.length === 0">
     <h1>The cart is empty</h1>
