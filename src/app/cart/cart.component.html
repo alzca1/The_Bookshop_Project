@@ -1,9 +1,15 @@
-<div *ngIf="!isLoading">
-  <app-address *ngIf="modal" (close)="onHandleClose()"></app-address>
-  <div class="text-center mt-5" *ngIf="updatedServerCart.length === 0">
-    <h1>The cart is empty</h1>
-    <fa-icon class="fa-5x" [icon]="faFrown"></fa-icon>
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+  <div
+    class="spinner-border text-primary text-center spinner"
+    style="width: 3rem; height: 3rem;"
+  >
+    <span class="sr-only text-center">Loading</span>
   </div>
+</div>
+
+<div *ngIf="cartReady && !isLoading">
+  <app-address *ngIf="modal" (close)="onHandleClose()"></app-address>
+
   <div class="genContainer container" *ngIf="updatedServerCart.length > 0">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 col-xl-9">
@@ -117,3 +123,10 @@
     </div>
   </div>
 </div>
+
+
+  <div class="text-center mt-5" *ngIf="!cartReady && !isLoading">
+    <h1>The cart is empty</h1>
+    <fa-icon class="fa-5x" [icon]="faFrown"></fa-icon>
+  </div>
+

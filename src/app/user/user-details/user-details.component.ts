@@ -11,27 +11,26 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: any;
   details = [];
   detail: UserDetails;
-  noDetails: boolean; 
+  noDetails: boolean;
   isLoading;
   private sub: any;
 
   constructor(private userDetailsService: UserDetailsService) {}
 
   ngOnInit(): void {
-    this.noDetails = true; 
-    console.log('is Loading: ' + this.isLoading);
+    this.noDetails = true;
+
     this.userId = JSON.parse(localStorage.getItem('userData'));
     this.onGetDetails();
     this.sub = this.userDetailsService.loadedDetailsChanged.subscribe(
       (updatedDetails: UserDetails[]) => {
         this.details = updatedDetails;
-        if(this.details.length > 0){
+        if (this.details.length > 0) {
           this.noDetails = false;
         }
         this.orderDetails();
       }
     );
-    console.log('is Loading: ' + this.isLoading);
   }
 
   ngOnDestroy(): void {
@@ -39,26 +38,21 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
   onGetDetails() {
     this.isLoading = true;
-    console.log('is Loading: ' + this.isLoading);
-    this.userDetailsService.getUserDetails().subscribe((responseData) => {
-      console.log(responseData);
-    });
-   
+
+    this.userDetailsService.getUserDetails().subscribe((responseData) => {});
   }
 
   onDeleteDetail(detailId) {
     const detail = this.details.findIndex((item) => item.id === detailId);
     this.details.splice(detail, 1);
-    console.log(this.details);
+
     this.userDetailsService.deleteDetail(detailId);
   }
 
   orderDetails() {
-    console.log('sorting');
-    console.log(this.details);
     this.details.sort((a, b) => {
       return b.primary - a.primary || b.surname - a.surname || b.name - a.name;
     });
-    this.isLoading = false; 
+    this.isLoading = false;
   }
 }

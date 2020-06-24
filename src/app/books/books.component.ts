@@ -10,7 +10,7 @@ import { Book } from 'src/app/book.interface';
 })
 export class BooksComponent implements OnInit {
   //TODO add "loading books state"
-  loadingBooks: boolean;
+  isLoading: boolean;
   loadedBooks: Book[];
   constructor(private http: HttpClient, private srvservice: ServerService) {}
 
@@ -23,11 +23,11 @@ export class BooksComponent implements OnInit {
   }
 
   fetchPosts() {
-    this.loadingBooks = true;
+    this.isLoading = true;
     this.loadedBooks = [];
     this.srvservice.fetchBooks().subscribe((books) => {
       console.log('books fetched')
-      this.loadingBooks = false;
+      this.isLoading = false;
     });
   }
 

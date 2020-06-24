@@ -13,6 +13,17 @@ import { UserDetailsService } from 'src/app/services/userDetails.service';
 export class CartComponent implements OnInit {
   faCoffee = faCoffee;
   faFrown = faFrown;
+  isLoading: boolean;
+  updatedServerCart = [];
+  noCart: boolean;
+  noDetails: boolean;
+  cartReady: boolean; 
+  total: number;
+  amount = [0, 1, 2, 3, 4, 5];
+  loadedDetails = [];
+  public primaryAddress;
+  modal = false;
+
   updatedCart: {
     id: string;
     title: string;
@@ -21,42 +32,62 @@ export class CartComponent implements OnInit {
     cartAmount: number;
     price: number;
   }[];
-  isLoading = false;
-  updatedServerCart = [];
-  total: number;
-  amount = [0, 1, 2, 3, 4, 5];
-  loadedDetails = [];
-  public primaryAddress;
-  modal = false; 
+
   constructor(
     private cartservice: CartService,
     private userDetailsService: UserDetailsService
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.updatedServerCart = [];
-    this.cartservice.fetchFromServer().subscribe((response) => {
-      console.log(response);
-    });
+    
+    this.isLoading = true; 
+    this.cartReady = false; 
+    this.noDetails = true;
+    this.noCart = true;
+    this.onFetchFromServer();
     this.cartservice.loadedServerCartChanged.subscribe((response) => {
       this.updatedServerCart = response;
-      console.log(this.updatedServerCart);
+      console.log(this.updatedServerCart.length)
+      if (this.updatedServerCart.length > 0) {
+        this.noCart = false;
+      }
       this.onGetTotal();
     });
-    this.userDetailsService.getUserDetails().subscribe((response) => {
-      console.log(response);
-    });
+
+    this.onGetUserDetails();
+
     this.userDetailsService.loadedDetailsChanged.subscribe((response) => {
       this.loadedDetails = response;
+      if (this.loadedDetails.length > 0) {
+        this.noDetails = false;
+      }
       if (this.loadedDetails) {
         this.primaryAddress = {
           ...this.loadedDetails.filter((element) => element.primary == true)[0],
         };
-        console.log(this.primaryAddress);
       }
+      if(!this.noCart && !this.noDetails){
+        this.cartReady = true;
+        this.isLoading = false; 
+      }else{
+        this.cartReady = false; 
+        this.isLoading = false; 
+      }
+
+      
     });
-    this.isLoading = false;
+  }
+
+  onFetchFromServer() {
+   
+    this.cartservice.fetchFromServer().subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+  onGetUserDetails() {
+    this.userDetailsService.getUserDetails().subscribe((response) => {});
+    
   }
 
   onGetTotal() {
@@ -78,25 +109,18 @@ export class CartComponent implements OnInit {
     }
   }
 
-  onChangeAddress(){
-    console.log('hello')
-    this.modal = true; 
+  onChangeAddress() {
+    console.log('hello');
+    this.modal = true;
   }
 
-  onGetServerAddress(){
-
+  onHandleClose() {
+    this.modal = null;
   }
 
-  onHandleClose(){
-    this.modal = null; 
-  }
-
-  public setAddress(addressId){
-    console.log(addressId)
+  public setAddress(addressId) {
     this.primaryAddress = {
       ...this.loadedDetails.filter((element) => element.id == addressId)[0],
     };
-    console.log(this.loadedDetails);
-    console.log(this.primaryAddress)
   }
 }

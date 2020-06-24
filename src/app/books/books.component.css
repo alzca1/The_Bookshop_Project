@@ -1,3 +1,10 @@
+.spinner-border {
+  width: 5rem !important;
+  height: 5rem !important;
+  margin-top: 5rem;
+  /* Enter your own width above */
+}
+
 .bookGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

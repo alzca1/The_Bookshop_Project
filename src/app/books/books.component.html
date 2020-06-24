@@ -1,14 +1,16 @@
 <div class="d-flex justify-content-center mt-5">
   <div
     class="spinner-border text-primary"
-    *ngIf="loadingBooks"
+    *ngIf="isLoading"
     style="width: 3rem; height: 3rem;"
   >
     <span class="sr-only text-center">Loading</span>
   </div>
 </div>
 
-<h4 class="text-center mt-4" *ngIf="loadedBooks.length < 1 && !loadingBooks">
+
+
+<h4 class="text-center mt-4" *ngIf="loadedBooks.length < 1 && !isLoading">
   No books in the list
 </h4>
 <div class="bookGrid">
