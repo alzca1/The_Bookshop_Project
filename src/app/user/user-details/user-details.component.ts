@@ -9,26 +9,30 @@ import { UserDetails } from 'src/app/user/userDetails.model';
 })
 export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: any;
-  details: any;
+  details = [];
   detail: UserDetails;
+  noDetails: boolean; 
   isLoading;
   private sub: any;
 
   constructor(private userDetailsService: UserDetailsService) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this.noDetails = true; 
     console.log('is Loading: ' + this.isLoading);
-
     this.userId = JSON.parse(localStorage.getItem('userData'));
     this.onGetDetails();
     this.sub = this.userDetailsService.loadedDetailsChanged.subscribe(
       (updatedDetails: UserDetails[]) => {
         this.details = updatedDetails;
-        this.orderDetails(); 
+        if(this.details.length > 0){
+          this.noDetails = false;
+          this.isLoading = false; 
+        }
+        this.orderDetails();
+       
       }
     );
-    this.isLoading = false;
     console.log('is Loading: ' + this.isLoading);
   }
 
@@ -41,8 +45,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.userDetailsService.getUserDetails().subscribe((responseData) => {
       console.log(responseData);
     });
-    this.isLoading = false;
-    console.log('is Loading: ' + this.isLoading);
+   
   }
 
   onDeleteDetail(detailId) {
@@ -52,11 +55,12 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.userDetailsService.deleteDetail(detailId);
   }
 
-  orderDetails(){
-    console.log('sorting')
-    console.log(this.details)
-    this.details.sort((a, b)=> {
+  orderDetails() {
+    console.log('sorting');
+    console.log(this.details);
+    this.details.sort((a, b) => {
       return b.primary - a.primary || b.surname - a.surname || b.name - a.name;
-    })
+    });
+    this.isLoading = false; 
   }
 }

@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="container mt-3" *ngIf="details && !isLoading; else noDetails">
+<div class="container mt-3" *ngIf="noDetails && !isLoading; else noDetails">
   <h3 class="text-center">User Address Info</h3>
 
   <div *ngFor="let detail of details">
@@ -34,20 +34,29 @@
       </div>
     </div>
   </div>
+  <div class="justify-content-center d-flex" *ngIf="!isLoading">
+    <button
+      class="btn btn-small btn-outline-dark mt-5"
+      routerLink="../userDetailsForm"
+    >
+      Add Address
+    </button>
+    
+  </div>
 </div>
-
 <ng-template #noDetails>
   <div class="mt-5">
     <h4 class="text-center">No details provided yet!</h4>
   </div>
+  <div class="justify-content-center d-flex" *ngIf="!isLoading">
+    <button
+      class="btn btn-small btn-outline-dark mt-5"
+      routerLink="../userDetailsForm"
+    >
+      Add Address
+    </button>
+    
+  </div>
 </ng-template>
 
-<div class="justify-content-center d-flex" *ngIf="!isLoading">
-  <button
-    class="btn btn-small btn-outline-dark mt-5"
-    routerLink="../userDetailsForm"
-  >
-    Add Address
-  </button>
-  
-</div>
+
