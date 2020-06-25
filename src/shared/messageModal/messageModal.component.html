@@ -1,0 +1,13 @@
+<div (click)="onClose()" class="backdrop"></div>
+<div class="alert-box">
+  <div class=" d-flex flex-column justify-content-center">
+    <p class="text-center mt-2"><strong>Thank you for your order!</strong></p>
+    <span class="text-justify">It will be processed and shipped very soon! </span>
+    <p class="text-justify mt-1">Please,refer to <a routerLink ="/user/userOrders">My orders</a> section to get updates on your order status</p>
+  </div>
+  <div class="alert-box-actions">
+    <button (click)="onClose()" class="btn btn-primary btn-sm my-2 ">Close</button>
+  </div>
+</div>
+
+
