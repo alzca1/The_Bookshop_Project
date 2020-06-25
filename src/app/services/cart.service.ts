@@ -122,7 +122,6 @@ export class CartService {
       console.log('element deleted from cart');
     });
   }
-  // añadir nueva cantidad al elemento guardado en el cart en el servidor
 
   handlePost(baseUrl, book) {
     this.http.post(baseUrl, book).subscribe((response) => {
@@ -136,16 +135,25 @@ export class CartService {
     });
   }
 
-  
+  processOrder(order) {
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      this.user.id +
+      '/orders.json?auth=' +
+      this.user._token;
+      this.http.post(baseUrl, order).subscribe(response => {
+        console.log(response);
+      })
+  }
+
+  emptyCart(){
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/users/' +
+      this.user.id +
+      '/cart.json?auth=' +
+      this.user._token;
+      this.http.delete(baseUrl).subscribe(response => {
+        console.log(response)
+      })
+  }
 }
-
-// la idea sería crear dos funciones: una que sume solo 1 unidad (para
-// la vista de book-detail) y otra que actualice cantidades en el el
-// propio carrito.
-
-// pasos para añadir:
-// 1) descargo del servidor
-// 2) encuentro el elemento si existe con indexOf
-// 3) si no existe, añado al servidor.
-// 4)) si existe,  guardo el valor actual en una variable y le sumo uno
-// 5) hago el patch de la prop en el servidor

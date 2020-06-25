@@ -4,6 +4,8 @@ import { Book } from 'src/app/book.interface';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faFrown } from '@fortawesome/free-regular-svg-icons';
 import { UserDetailsService } from 'src/app/services/userDetails.service';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -17,12 +19,15 @@ export class CartComponent implements OnInit {
   updatedServerCart = [];
   noCart: boolean;
   noDetails: boolean;
-  cartReady: boolean; 
+  cartReady: boolean;
   total: number;
   amount = [0, 1, 2, 3, 4, 5];
   loadedDetails = [];
   public primaryAddress;
   modal = false;
+  orderProcessed = false;
+  dateNow = new Date(); 
+  dateNowIso = this.dateNow.toISOString();
 
   updatedCart: {
     id: string;
@@ -35,19 +40,19 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartservice: CartService,
-    private userDetailsService: UserDetailsService
+    private userDetailsService: UserDetailsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    
-    this.isLoading = true; 
-    this.cartReady = false; 
+    this.isLoading = true;
+    this.cartReady = false;
     this.noDetails = true;
     this.noCart = true;
     this.onFetchFromServer();
     this.cartservice.loadedServerCartChanged.subscribe((response) => {
       this.updatedServerCart = response;
-      console.log(this.updatedServerCart.length)
+      console.log(this.updatedServerCart.length);
       if (this.updatedServerCart.length > 0) {
         this.noCart = false;
       }
@@ -66,20 +71,17 @@ export class CartComponent implements OnInit {
           ...this.loadedDetails.filter((element) => element.primary == true)[0],
         };
       }
-      if(!this.noCart && !this.noDetails){
+      if (!this.noCart && !this.noDetails) {
         this.cartReady = true;
-        this.isLoading = false; 
-      }else{
-        this.cartReady = false; 
-        this.isLoading = false; 
+        this.isLoading = false;
+      } else {
+        this.cartReady = false;
+        this.isLoading = false;
       }
-
-      
     });
   }
 
   onFetchFromServer() {
-   
     this.cartservice.fetchFromServer().subscribe((response) => {
       console.log(response);
     });
@@ -87,7 +89,6 @@ export class CartComponent implements OnInit {
 
   onGetUserDetails() {
     this.userDetailsService.getUserDetails().subscribe((response) => {});
-    
   }
 
   onGetTotal() {
@@ -107,6 +108,9 @@ export class CartComponent implements OnInit {
       this.onGetTotal();
       this.cartservice.removeFromServer(cartId);
     }
+    if (this.updatedServerCart.length === 0) {
+      this.noCart = true;
+    }
   }
 
   onChangeAddress() {
@@ -118,9 +122,32 @@ export class CartComponent implements OnInit {
     this.modal = null;
   }
 
+  onHandleCloseProcessed() {
+    this.orderProcessed = null;
+    setTimeout(() => {
+      this.router.navigate(['../books']);
+    }, 1000);
+  }
+
   public setAddress(addressId) {
     this.primaryAddress = {
       ...this.loadedDetails.filter((element) => element.id == addressId)[0],
     };
+  }
+
+  onProcessOrder() {
+    const order = {
+      books: this.updatedServerCart,
+      address: this.primaryAddress,
+      orderDate: this.dateNowIso,
+      status: 'pending',
+    };
+    const now = Date.now(); 
+    
+    setTimeout(() => {
+      this.cartservice.processOrder(order);
+      this.orderProcessed = true;
+      this.cartservice.emptyCart();
+    }, 600);
   }
 }

@@ -30,6 +30,8 @@ import { UserDetailsComponent } from './user/user-details/user-details.component
 import { UserDetailsFormComponent } from './user/user-details/user-details-form/user-details-form.component';
 import { UserWishlistComponent } from './user/user-wishlist/user-wishlist.component';
 import { AddressModalComponent } from 'src/shared/addressModal/addressModal.component';
+import { UserOrdersComponent } from './user/user-orders/user-orders.component';
+import { MessageModalComponent } from 'src/shared/messageModal/messageModal.component';
 
 const appRoutes: Route[] = [
   {
@@ -98,6 +100,10 @@ const appRoutes: Route[] = [
       {
         path: 'wishlist', 
         component: UserWishlistComponent
+      }, 
+      {
+        path: 'userOrders', 
+        component: UserOrdersComponent
       }
     ],
   },
@@ -124,7 +130,9 @@ const appRoutes: Route[] = [
     UserDetailsComponent,
     UserDetailsFormComponent,
     UserWishlistComponent,
-    AddressModalComponent
+    AddressModalComponent,
+    UserOrdersComponent,
+    MessageModalComponent
   ],
   imports: [
     CommonModule,

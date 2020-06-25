@@ -9,6 +9,7 @@
 
 <div *ngIf="cartReady && !isLoading">
   <app-address *ngIf="modal" (close)="onHandleClose()"></app-address>
+  <app-message  *ngIf="orderProcessed" (close)="onHandleCloseProcessed()"></app-message>
 
   <div class="genContainer container" *ngIf="updatedServerCart.length > 0">
     <div class="row">
@@ -118,7 +119,7 @@
         <div class="flex-fill d-flex flex-column justify-content-end">
           <h4 class="text-center align-self-end text-success">{{ total }}€</h4>
         </div>
-        <button class="btn btn-warning my-3">Buy Now!</button>
+        <button (click)="onProcessOrder()" class="btn btn-warning my-3">Buy Now!</button>
       </div>
     </div>
   </div>
