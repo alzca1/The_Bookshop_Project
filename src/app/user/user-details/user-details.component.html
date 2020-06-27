@@ -17,8 +17,9 @@
           <div class=" p-4 mb-2 addressContainer" [ngClass]="detail.primary? 'border-success': 'border'">
             <small class="text-center text-success mb-3" *ngIf="detail.primary"> Primary Address</small>
             <h5>{{ detail.firstName }} {{ detail.surname }}</h5>
-            <h6>{{ detail.address1 }} - {{ detail.postCode }}</h6>
-            <h6>{{ detail.city }} ({{ detail.country }}</h6>
+            <h6>{{ detail.address1 }}</h6>
+            <h6> {{ detail.postCode }} - {{ detail.city }} ({{ detail.country }})</h6>
+            <h6></h6>
             <span class="mr-5"
               ><a [routerLink]="['../userDetailsForm', detail.id]"
                 >Edit
@@ -44,7 +45,7 @@
   </div>
 </div>
 
-  <div class="mt-5" *ngif="noDetails && !isLoading">
+  <div class="mt-5" *ngIf="noDetails && !isLoading">
     <h4 class="text-center">No details provided yet!</h4>
     <div class="justify-content-center d-flex">
       <button

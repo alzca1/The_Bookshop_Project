@@ -83,6 +83,7 @@ export class CartComponent implements OnInit {
 
   onFetchFromServer() {
     this.cartservice.fetchFromServer().subscribe((response) => {
+      this.isLoading = false;
       console.log(response);
     });
   }
@@ -141,8 +142,8 @@ export class CartComponent implements OnInit {
       address: this.primaryAddress,
       orderDate: this.dateNowIso,
       status: 'pending',
+      orderTotal: this.total
     };
-    const now = Date.now(); 
     
     setTimeout(() => {
       this.cartservice.processOrder(order);

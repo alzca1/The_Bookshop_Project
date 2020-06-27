@@ -1,4 +1,132 @@
+<h2 class="text-center mt-3">My orders</h2>
 
-<div class="orderBox">
-    
+<div class="accordion mx-auto mt-4" id="accordionExample">
+  <div
+    class="card mx-1 rounded"
+    *ngFor="let order of loadedOrders; let index = index"
+  >
+    <div class="card-header orderHeader" id="header{{ index }}">
+      <div
+        class="container"
+        data-toggle="collapse"
+        [attr.data-target]="'#card' + index"
+      >
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="d-flex flex-column">
+              <span class="mb-1">Order Date</span>
+              <span class="mb-1">
+                <strong>{{ order.orderDate | date }}</strong></span
+              >
+            </div>
+          </div>
+          <div class="col-xs-4 ml-2">
+            <div class="d-flex flex-column">
+              <span class="mb-1">Ships to:</span>
+              <span class="mb-1">
+                <strong
+                  >{{ order.address.city }} - ({{
+                    order.address.postCode
+                  }})</strong
+                ></span
+              >
+              <span></span>
+            </div>
+          </div>
+          <div class="col-xs-4 flex-fill">
+            <div class="d-flex justify-content-end">
+              <h2 class="mt-2">
+                <button
+                  class="btn btn-link btn-block text-left boton"
+                  type="button"
+                  data-toggle="collapse"
+                  [attr.data-target]="'#card' + index"
+                  aria-expanded="true"
+                  aria-controls="'collapse' + index"
+                >
+                  Details
+                </button>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end"></div>
+    </div>
+
+    <div
+      [attr.id]="'card' + index"
+      class="collapse"
+      aria-labelledby="'index'"
+      data-parent="#accordionExample"
+    >
+      <div class="card-body">
+        <div class="container detailsInfo">
+          <div class="row">
+            <div class="col-xs-5">
+              <span class="detailsInfo">Sent to:</span> <br />
+              <p class="detailsInfo">
+                <strong
+                  >{{ order.address.firstName }} {{ order.address.surname }}
+                </strong>
+                <br />
+                {{ order.address.address1 }} <br />
+                <span *ngIf="order.address.address2">{{
+                  order.address.address2
+                }}</span>
+                <br />
+                {{ order.address.postCode }} - {{ order.address.city }} ({{
+                  order.address.country
+                }})
+              </p>
+            </div>
+            <div class="col-xs-4 flex-fill"></div>
+            <div class="col-xs-3 flex-fill ">
+              <span>Order Status</span> <br>
+              <span [class.text-warning]="order.status === 'pending'">{{order.status}}</span>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="container" *ngFor="let book of order.books">
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="my-3">
+                <img src="{{ book.cover }}" />
+              </div>
+            </div>
+            <div class="col-xs-3 my-3 ml-3 bookInfo d-flex flex-column">
+              <span>
+                <strong>{{ book.title | stringShortener: 18 }}</strong></span
+              >
+              <span class="author"> {{ book.author }}</span>
+              <span> <strong class="text-primary">{{ book.price }}€ </strong> x {{ book.cartAmount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- <div class="accordion" id="ordersAccordion">
+  <div class="card" *ngFor="let order of loadedOrders; let index = index">
+    <div class="card-header" id="heading{{ index }}">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-link btn-block text-left"
+          type="button"
+          attr.data-toggle="collapse"
+          attr.data-target="#_{{index}}"
+        >
+          Order {{ index }}
+        </button>
+      </h2>
+    </div>
+    <div id="_{{ index }}" class="collapse show" data-parent="#ordersAccordion">
+      <div class="card-body">
+        {{ order.id }}
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -27,7 +27,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.details = updatedDetails;
         if (this.details.length > 0) {
           this.noDetails = false;
-          this.isLoading = false; 
+        } else {
+          this.noDetails = true;
         }
         this.orderDetails();
       }
@@ -39,7 +40,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
   onGetDetails() {
     this.isLoading = true;
-    this.userDetailsService.getUserDetails().subscribe((responseData) => {});
+    this.userDetailsService.getUserDetails().subscribe((responseData) => {
+      this.isLoading = false;
+    });
   }
 
   onDeleteDetail(detailId) {
