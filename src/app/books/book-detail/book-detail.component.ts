@@ -18,6 +18,7 @@ export class BookDetailComponent implements OnInit {
   onWishList: boolean;
   wishList: Book[];
   postResponse: { name: string };
+  addToCartButtonText: string; 
   constructor(
     private route: ActivatedRoute,
     private srvservice: ServerService,
@@ -48,12 +49,15 @@ export class BookDetailComponent implements OnInit {
       for (let key in updatedBooks) {
         if (updatedBooks[key].id === this.id) {
           this.loadedBook = { ...updatedBooks[key] };
+          this.getAddToCartButtonStatus(); 
         }
       }
     });
     // me subscribo a la lista de libros de la wishlist descargados
-    this.wishlistService.loadedWishListChanged.subscribe((wishlistBooks) => {});
-
+    this.wishlistService.loadedWishListChanged.subscribe((wishlistBooks) => {
+      
+    });
+    
     // fin del init
   }
 
@@ -86,7 +90,11 @@ export class BookDetailComponent implements OnInit {
   }
 
   onAddToCart() {
+    this.addToCartButtonText = "Added!";
     this.cartservice.addToCart(this.loadedBook);
+    setTimeout( () => {
+     this.getAddToCartButtonStatus();
+    }, 2500)
     console.log('onAddToCart triggered')
   }
 
@@ -134,5 +142,14 @@ export class BookDetailComponent implements OnInit {
       }
     });
     console.log('wishlist check finished!');
+  }
+
+  getAddToCartButtonStatus(){
+    console.log('setting button')
+    if(this.loadedBook.stock > 0){
+      this.addToCartButtonText = "Add To Cart"
+    }else{
+      this.addToCartButtonText = "Sold Out!"
+    }
   }
 }
