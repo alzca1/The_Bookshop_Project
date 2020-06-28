@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ServerService } from 'src/app/services/server.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,11 @@ export class CartService {
   book: Book;
   user = JSON.parse(localStorage.getItem('userData'));
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private serverService: ServerService
+  ) {}
 
   getTotal(cart) {
     let total = 0;
@@ -33,6 +38,8 @@ export class CartService {
   }
 
   addToCart(book) {
+   
+
     console.log('addToCart triggered!');
     let cartBook = {
       id: book.id,
@@ -73,7 +80,7 @@ export class CartService {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       this.user.id +
-      '/cart/' +
+      '/cart/books/' +
       cartId +
       '.json?auth=' +
       this.user._token;
@@ -144,16 +151,38 @@ export class CartService {
       this.http.post(baseUrl, order).subscribe(response => {
         console.log(response);
       })
+    this.updateStock(order);
   }
 
-  emptyCart(){
+  emptyCart() {
     const baseUrl =
       'https://proyectoangular-5f739.firebaseio.com/users/' +
       this.user.id +
       '/cart.json?auth=' +
       this.user._token;
-      this.http.delete(baseUrl).subscribe(response => {
-        console.log(response)
+    this.http.delete(baseUrl).subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+  updateStock(order) {
+    const orderBooks = order.books;
+    const bookCollection = this.serverService.loadedBooks;
+
+    orderBooks.map((book) => {
+      const bookOrderAmount = book.cartAmount
+      this.serverService.checkStockAvailability(book.id).subscribe(response => {
+        const fetchedBook:any = response;
+        console.log(fetchedBook.id)
+        const remainingStock = fetchedBook.stock - bookOrderAmount;
+     if(remainingStock>=0){
+     this.serverService.patch(book.id,{
+       stock: remainingStock
+     }).subscribe(response => {
+       console.log(response)
+     })
+     }
       })
+    });
   }
 }

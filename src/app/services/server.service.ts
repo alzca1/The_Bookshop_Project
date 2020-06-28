@@ -41,6 +41,7 @@ export class ServerService {
   }
 
   fetchBook(id) {
+    console.log(id)
     this.fetchBooks().subscribe((posts) => {
       for (let book in this.loadedBooks) {
         if (book[id] === id) {
@@ -83,4 +84,24 @@ export class ServerService {
       'https://proyectoangular-5f739.firebaseio.com/books/' + id + '.json';
     return this.http.delete(baseUrl);
   }
+
+  checkStockAvailability(bookId){
+    const baseUrl =
+    'https://proyectoangular-5f739.firebaseio.com/books/' + bookId + '.json'
+
+    return this.http.get(baseUrl);
+  }
+
+  patch(bookId, object){
+  // problemas con el bookId?
+  console.log(bookId)
+    const baseUrl =
+      'https://proyectoangular-5f739.firebaseio.com/books/' + bookId + '.json';
+      console.log(baseUrl)
+      return this.http.patch(baseUrl,object)
+  }
+
+
+
+
 }
